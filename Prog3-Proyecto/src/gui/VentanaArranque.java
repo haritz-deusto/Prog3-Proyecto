@@ -1,4 +1,4 @@
-package main;
+package gui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,12 +10,11 @@ import java.awt.event.ActionListener;
 
 public class VentanaArranque  extends JFrame{
 	private static final long serialVersionUID = 1L;
-	public static void main(String[] args) {
-        JFrame ventana = new JFrame("Deusto Stream");
-        ventana.setSize(1000, 800);
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setLocationRelativeTo(null);
-        ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	public VentanaArranque() {
+        setSize(1000, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         JPanel panelSuperior = new JPanel();
         panelSuperior.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -25,7 +24,7 @@ public class VentanaArranque  extends JFrame{
         panelSuperior.add(botonPrueba);
         panelSuperior.add(botonInicioSesion);
         panelSuperior.add(botonRegistro);
-        ventana.add(panelSuperior, BorderLayout.NORTH);
+        add(panelSuperior, BorderLayout.NORTH);
         
         botonPrueba.addActionListener(new ActionListener() {
 			@Override
@@ -50,6 +49,6 @@ public class VentanaArranque  extends JFrame{
             }
         });
         
-        ventana.setVisible(true);
-    }
+        setVisible(true);
+	}
 }
