@@ -7,6 +7,9 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
+import imagenes.*;
 
 public class VentanaArranque  extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -16,15 +19,21 @@ public class VentanaArranque  extends JFrame{
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
+        JPanel panelCentral = new JPanel();
         JPanel panelSuperior = new JPanel();
+        JLabel labelImagen = new JLabel();
+        add(panelCentral, BorderLayout.CENTER);
+        ImageIcon imagen = new ImageIcon("imagenes/LogoDeustoStream.jpeg");
         panelSuperior.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton botonInicioSesion = new JButton("Iniciar Sesión");
         JButton botonRegistro = new JButton("Registrase");
-        JButton botonPrueba = new JButton("Boton Prueba");
+        JButton botonPrueba = new JButton("Iniciar Sesión como Admin");
         panelSuperior.add(botonPrueba);
         panelSuperior.add(botonInicioSesion);
         panelSuperior.add(botonRegistro);
         add(panelSuperior, BorderLayout.NORTH);
+        panelCentral.add(labelImagen);
+        
         
         botonPrueba.addActionListener(new ActionListener() {
 			@Override
@@ -48,6 +57,8 @@ public class VentanaArranque  extends JFrame{
             	
             }
         });
+        
+
         
         setVisible(true);
 	}
