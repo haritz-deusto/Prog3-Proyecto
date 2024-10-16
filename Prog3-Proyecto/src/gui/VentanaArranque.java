@@ -4,12 +4,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.awt.*;
-import imagenes.*;
+
 
 public class VentanaArranque  extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -21,19 +21,30 @@ public class VentanaArranque  extends JFrame{
         
         JPanel panelCentral = new JPanel();
         JPanel panelSuperior = new JPanel();
-        JLabel labelImagen = new JLabel();
-        add(panelCentral, BorderLayout.CENTER);
+        
+        
         ImageIcon imagen = new ImageIcon("imagenes/LogoDeustoStream.jpeg");
+        JLabel labelImagen = new JLabel(imagen);
+        
         panelSuperior.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        panelCentral.setLayout(new BorderLayout());
+        
         JButton botonInicioSesion = new JButton("Iniciar Sesión");
         JButton botonRegistro = new JButton("Registrase");
-        JButton botonPrueba = new JButton("Iniciar Sesión como Admin");
+        JButton botonPrueba = new JButton("Boton Prueba");
+        JButton botonInicioAdmin = new JButton("Inicio de Sesion como Administrador");
+        
+        add(panelSuperior, BorderLayout.NORTH);   
+        add(panelCentral, BorderLayout.CENTER);
+        
         panelSuperior.add(botonPrueba);
         panelSuperior.add(botonInicioSesion);
         panelSuperior.add(botonRegistro);
-        add(panelSuperior, BorderLayout.NORTH);
-        panelCentral.add(labelImagen);
+        panelSuperior.add(botonInicioAdmin);
+        panelCentral.add(labelImagen,BorderLayout.CENTER);
         
+        
+       
         
         botonPrueba.addActionListener(new ActionListener() {
 			@Override
