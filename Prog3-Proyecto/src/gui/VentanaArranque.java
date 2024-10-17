@@ -20,13 +20,13 @@ public class VentanaArranque  extends JFrame{
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         JPanel panelCentral = new JPanel();
-        JPanel panelSuperior = new JPanel();
+        JPanel panelInferior = new JPanel();
         
         
-        ImageIcon imagen = new ImageIcon("imagenes/LogoDeustoStream.jpeg");
+        ImageIcon imagen = new ImageIcon("Prog3-Proyecto/imagenes/Logo.png");
         JLabel labelImagen = new JLabel(imagen);
         
-        panelSuperior.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        panelInferior.setLayout(new FlowLayout(FlowLayout.CENTER));
         panelCentral.setLayout(new BorderLayout());
         
         JButton botonInicioSesion = new JButton("Iniciar Sesión");
@@ -34,13 +34,13 @@ public class VentanaArranque  extends JFrame{
         JButton botonPrueba = new JButton("Boton Prueba");
         JButton botonInicioAdmin = new JButton("Inicio de Sesion como Administrador");
         
-        add(panelSuperior, BorderLayout.NORTH);   
+        add(panelInferior, BorderLayout.SOUTH);   
         add(panelCentral, BorderLayout.CENTER);
         
-        panelSuperior.add(botonPrueba);
-        panelSuperior.add(botonInicioSesion);
-        panelSuperior.add(botonRegistro);
-        panelSuperior.add(botonInicioAdmin);
+        panelInferior.add(botonPrueba);
+        panelInferior.add(botonInicioSesion);
+        panelInferior.add(botonRegistro);
+        panelInferior.add(botonInicioAdmin);
         panelCentral.add(labelImagen,BorderLayout.CENTER);
         
         
