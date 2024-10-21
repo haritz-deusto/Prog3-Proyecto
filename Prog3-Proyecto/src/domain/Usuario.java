@@ -6,18 +6,20 @@ public class Usuario {
 	private String apellido;
 	private String dni;
 	private String email;
+	private String contrasenia;
 	private int numTel;
 	private int numTarjeta;
 	
 	public Usuario() {
 		super();
 	}
-	public Usuario(String nombre, String apellido, String dni, String email, int numTel, int numTarjeta) {
+	public Usuario(String nombre, String apellido, String dni, String email, String contrasenia, int numTel, int numTarjeta) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
 		this.email = email;
+		this.contrasenia = contrasenia;
 		this.numTel = numTel;
 		this.numTarjeta = numTarjeta;
 	}
@@ -45,6 +47,13 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getContrasenia() {
+		return contrasenia;
+	}
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
 	public int getNumTel() {
 		return numTel;
 	}
@@ -60,7 +69,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", email=" + email
-				+ ", numTel=" + numTel + ", numTarjeta=" + numTarjeta + "]";
+				+ ", contrasenia=" + contrasenia + ", numTel=" + numTel + ", numTarjeta=" + numTarjeta + "]";
 	}
 	
 	
