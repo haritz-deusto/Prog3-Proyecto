@@ -11,6 +11,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 class VentanaInicioSesion extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private JLabel labelNombre;
     private JLabel labelDni;
     private JLabel labelContrasenia;
