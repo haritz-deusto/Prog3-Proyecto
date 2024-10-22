@@ -62,6 +62,8 @@ public class VentanaPrincipal extends JFrame{
 		getContentPane().add(panelSur, BorderLayout.SOUTH);
 		getContentPane().add(panelCentro, BorderLayout.CENTER);
 		
+		panelSur.add(btnVolver);
+		
 		panelNorte.add(labelTitulo, BorderLayout.NORTH);
 		panelNorte.add(barraMenu, BorderLayout.CENTER);
 		

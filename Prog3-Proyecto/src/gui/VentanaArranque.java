@@ -13,11 +13,13 @@ import javax.swing.*;
 
 public class VentanaArranque extends JFrame {
     private static final long serialVersionUID = 1L;
+    
+    private JButton btnCerrar;
 
     public VentanaArranque() {
     	
         setSize(1000, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setTitle("DeustoStream");
@@ -44,6 +46,9 @@ public class VentanaArranque extends JFrame {
 
         JButton botonInicioAdmin = new JButton("Inicio de Sesión como Administrador");
         botonInicioAdmin.setToolTipText("Haz clic para iniciar sesión como administrador");
+        
+        btnCerrar = new JButton("Cerrar Ventana");
+        btnCerrar.setToolTipText("Haz clic para cerrar");
 
         add(panelInferior, BorderLayout.SOUTH);
         add(panelCentral, BorderLayout.CENTER);
@@ -53,6 +58,12 @@ public class VentanaArranque extends JFrame {
         panelInferior.add(botonRegistro);
         panelInferior.add(botonInicioAdmin);
         panelCentral.add(labelImagen, BorderLayout.CENTER);
+        
+        panelInferior.add(btnCerrar);
+        
+        btnCerrar.addActionListener((e)->{
+        	dispose();
+        });
 
         botonPrueba.addActionListener(new ActionListener() {
             @Override
