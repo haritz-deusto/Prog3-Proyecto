@@ -1,6 +1,6 @@
 package domain;
 
-public class Usuario {
+public abstract class Usuario {
 	
 	private String nombre;
 	private String apellido;
@@ -8,7 +8,6 @@ public class Usuario {
 	private String email;
 	private String contrasenia;
 	private int numTel;
-	private int numTarjeta;
 	
 	public Usuario() {
 		super();
@@ -21,7 +20,6 @@ public class Usuario {
 		this.email = email;
 		this.contrasenia = contrasenia;
 		this.numTel = numTel;
-		this.numTarjeta = numTarjeta;
 	}
 	public String getNombre() {
 		return nombre;
@@ -60,16 +58,11 @@ public class Usuario {
 	public void setNumTel(int numTel) {
 		this.numTel = numTel;
 	}
-	public int getNumTarjeta() {
-		return numTarjeta;
-	}
-	public void setNumTarjeta(int numTarjeta) {
-		this.numTarjeta = numTarjeta;
-	}
+	
 	@Override
 	public String toString() {
 		return "Usuario [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", email=" + email
-				+ ", contrasenia=" + contrasenia + ", numTel=" + numTel + ", numTarjeta=" + numTarjeta + "]";
+				+ ", contrasenia=" + contrasenia + ", numTel=" + numTel + ", numTarjeta="+ "]";
 	}
 	
 	

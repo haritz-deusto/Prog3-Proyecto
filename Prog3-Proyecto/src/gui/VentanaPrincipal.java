@@ -15,16 +15,14 @@ import javax.swing.SwingConstants;
 
 public class VentanaPrincipal extends JFrame{
 	
+	
+	private static final long serialVersionUID = 1L;
+	
 	private JMenuBar barraMenu;
-	
 	private JMenuItem itemCuenta, itemPeliculas;
-	
 	private JMenu visualizarCuenta, visualizarPeliculas;
-	
 	private JPanel panelCentro, panelSur, panelNorte, panelEste, panelOeste;
-	
 	private JLabel labelTitulo;
-	
 	private JButton btnVolver;
 	
 	public VentanaPrincipal(){

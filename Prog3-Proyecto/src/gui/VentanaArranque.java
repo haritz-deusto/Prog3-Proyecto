@@ -15,15 +15,9 @@ import javax.swing.*;
 public class VentanaArranque extends JFrame {
     private static final long serialVersionUID = 1L;
     
-    private JButton btnCerrar;
+    public JButton btnCerrar;
 
     public VentanaArranque() {
-    	
-        setSize(1000, 800);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setTitle("DeustoStream");
 
         JPanel panelCentral = new JPanel();
         JPanel panelInferior = new JPanel();
@@ -95,5 +89,9 @@ public class VentanaArranque extends JFrame {
         });
 
         setVisible(true);
+        setSize(getMaximumSize());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setTitle("DeustoStream");
     }
 }
