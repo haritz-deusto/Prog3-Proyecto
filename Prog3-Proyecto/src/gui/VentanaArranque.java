@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -27,10 +28,16 @@ public class VentanaArranque extends JFrame {
         JPanel panelCentral = new JPanel();
         JPanel panelInferior = new JPanel();
 
-        ImageIcon imagen = new ImageIcon("Prog3-Proyecto/imagenes/Logo.png");
-        JLabel labelImagen = new JLabel(imagen);
+        ImageIcon imagen = new ImageIcon("Prog3-Proyecto/Prog3-Proyecto/src/imagenes/Logo.png");
+        Image imagenEscalada = imagen.getImage().getScaledInstance(300, 300,Image.SCALE_SMOOTH);
+        ImageIcon imagenFinal = new ImageIcon(imagenEscalada);
+        
+        JLabel labelImagen = new JLabel(imagenFinal);
         labelImagen.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding around the image
 
+        labelImagen.setHorizontalAlignment(JLabel.CENTER);
+        labelImagen.setVerticalAlignment(JLabel.CENTER);
+        
         panelInferior.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Add spacing between buttons
         panelCentral.setLayout(new BorderLayout());
         panelCentral.setBackground(Color.LIGHT_GRAY); // Set background color
