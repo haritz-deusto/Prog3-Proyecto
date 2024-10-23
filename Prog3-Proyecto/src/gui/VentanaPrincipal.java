@@ -28,7 +28,7 @@ public class VentanaPrincipal extends JFrame{
 	private JButton btnVolver;
 	
 	public VentanaPrincipal(){
-		setTitle("DeuStream");
+		setTitle("DeustoStream");
 		setSize(1000,800);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -52,7 +52,7 @@ public class VentanaPrincipal extends JFrame{
 		
 		btnVolver = new JButton("Volver");
 		
-		labelTitulo = new JLabel("DeuStream");
+		labelTitulo = new JLabel("DeustoStream");
 		labelTitulo.setFont(new Font(Font.SERIF, Font.BOLD, 40));
 		labelTitulo.setHorizontalAlignment(SwingConstants.LEFT);
 		
