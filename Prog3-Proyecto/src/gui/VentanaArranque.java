@@ -1,41 +1,28 @@
-
 package gui;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 
 public class VentanaArranque extends JFrame {
     private static final long serialVersionUID = 1L;
-    
-    public JButton btnCerrar;
 
     public VentanaArranque() {
 
-        JPanel panelCentral = new JPanel();
-        JPanel panelInferior = new JPanel();
+        JPanel panelCentral = new JPanel(new BorderLayout());
+        JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Espaciado entre botones
 
-        ImageIcon imagen = new ImageIcon("Prog3-Proyecto/Prog3-Proyecto/src/imagenes/Logo.png");
-        Image imagenEscalada = imagen.getImage().getScaledInstance(300, 300,Image.SCALE_SMOOTH);
-        ImageIcon imagenFinal = new ImageIcon(imagenEscalada);
-        
-        JLabel labelImagen = new JLabel(imagenFinal);
-        labelImagen.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding around the image
+        //LOGO
+        ImageIcon imagen = new ImageIcon(getClass().getResource("/imagenes/deustoStreamLogo1.png"));
+        Image imagenEscalada = imagen.getImage().getScaledInstance(512, 256, Image.SCALE_SMOOTH); 
+        ImageIcon imagenFinal = new ImageIcon(imagenEscalada); 
+        JLabel labelImagen = new JLabel(imagenFinal); 
+        labelImagen.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); 
+        labelImagen.setHorizontalAlignment(JLabel.CENTER); 
+        labelImagen.setVerticalAlignment(JLabel.CENTER);   
 
-        labelImagen.setHorizontalAlignment(JLabel.CENTER);
-        labelImagen.setVerticalAlignment(JLabel.CENTER);
-        
-        panelInferior.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Add spacing between buttons
-        panelCentral.setLayout(new BorderLayout());
-        panelCentral.setBackground(Color.LIGHT_GRAY); // Set background color
-
+        //BOTONES
         JButton botonInicioSesion = new JButton("Iniciar Sesión");
         botonInicioSesion.setToolTipText("Haz clic para iniciar sesión");
 
@@ -45,26 +32,34 @@ public class VentanaArranque extends JFrame {
         JButton botonPrueba = new JButton("Botón Prueba");
         botonPrueba.setToolTipText("test");
 
-        JButton botonInicioAdmin = new JButton("Inicio de Sesión como Administrador");
-        botonInicioAdmin.setToolTipText("Haz clic para iniciar sesión como administrador");
+        //PERSONALIZAR BOTONES
+        botonInicioSesion.setBackground(new Color(0, 123, 255)); // Color fondo azul
+        botonInicioSesion.setForeground(Color.WHITE); 
+        botonInicioSesion.setFont(new Font("Arial", Font.BOLD, 14)); 
+        botonInicioSesion.setPreferredSize(new Dimension(150, 40)); 
+
+        botonRegistro.setBackground(new Color(0, 123, 255)); // Color de fondo azul
+        botonRegistro.setForeground(Color.WHITE); 
+        botonRegistro.setFont(new Font("Arial", Font.BOLD, 14));
+        botonRegistro.setPreferredSize(new Dimension(150, 40));
+
+        botonPrueba.setBackground(new Color(255, 193, 7)); // Color amarillo
+        botonPrueba.setForeground(Color.BLACK);
+        botonPrueba.setFont(new Font("Arial", Font.BOLD, 14));
+        botonPrueba.setPreferredSize(new Dimension(150, 40));
         
-        btnCerrar = new JButton("Cerrar Ventana");
-        btnCerrar.setToolTipText("Haz clic para cerrar");
-
-        add(panelInferior, BorderLayout.SOUTH);
-        add(panelCentral, BorderLayout.CENTER);
-
+        
+        //PANEL INFERIOR
         panelInferior.add(botonPrueba);
         panelInferior.add(botonInicioSesion);
         panelInferior.add(botonRegistro);
-        panelInferior.add(botonInicioAdmin);
+
+        //PANEL CENTRAL
+        panelCentral.setBackground(Color.LIGHT_GRAY); 
         panelCentral.add(labelImagen, BorderLayout.CENTER);
-        
-        panelInferior.add(btnCerrar);
-        
-        btnCerrar.addActionListener((e)->{
-        	dispose();
-        });
+
+        add(panelCentral, BorderLayout.CENTER);
+        add(panelInferior, BorderLayout.SOUTH);
 
         botonPrueba.addActionListener(new ActionListener() {
             @Override
@@ -75,6 +70,7 @@ public class VentanaArranque extends JFrame {
         });
 
         botonRegistro.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 VentanaRegistro ventanaRegistro = new VentanaRegistro();
                 ventanaRegistro.setVisible(true);
@@ -82,16 +78,17 @@ public class VentanaArranque extends JFrame {
         });
 
         botonInicioSesion.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion();
                 ventanaInicioSesion.setVisible(true);
             }
         });
 
-        setVisible(true);
-        setSize(getMaximumSize());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setTitle("DeustoStream");
+        setSize(800, 600);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
     }
 }
