@@ -16,7 +16,7 @@ class VentanaRegistro extends JFrame{
 	  
 	private JPanel panelCentro, panelSur, panelNorte, panelEste, panelOeste;
 	 
-	private JButton btnVolver;
+	private JButton btnVolver, btnConfirmar;
 	
 	private JLabel labelNombre;
 	private JLabel labelApellido;
@@ -46,6 +46,7 @@ class VentanaRegistro extends JFrame{
 	    panelSur = new JPanel();
 	    
 	    btnVolver = new JButton("Volver");
+	    btnConfirmar = new JButton("Confirmar");
 	     
 	    labelNombre = new JLabel("Introduzca su nombre");
 	    labelApellido = new JLabel("Introduzca su apellido");
@@ -83,6 +84,7 @@ class VentanaRegistro extends JFrame{
 	    panelCentro.add(txtContrasenia);
 	  
 	    panelSur.add(btnVolver);
+	    panelSur.add(btnConfirmar);
 	     
 	    btnVolver.addActionListener((e)->{
 	    	 dispose();
