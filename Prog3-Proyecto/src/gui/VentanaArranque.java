@@ -85,6 +85,7 @@ public class VentanaArranque extends JFrame {
             }
         });
 
+        setExtendedState(MAXIMIZED_BOTH);
         setTitle("DeustoStream");
         setSize(800, 600);
         setLocationRelativeTo(null);

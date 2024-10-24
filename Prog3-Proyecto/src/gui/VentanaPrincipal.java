@@ -26,10 +26,6 @@ public class VentanaPrincipal extends JFrame{
 	private JButton btnVolver;
 	
 	public VentanaPrincipal(){
-		setTitle("DeustoStream");
-		setSize(1000,800);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		barraMenu = new JMenuBar();
 		
@@ -68,5 +64,10 @@ public class VentanaPrincipal extends JFrame{
 		btnVolver.addActionListener((e)->{
         	dispose();
         });
+		
+		
+		setTitle("DeustoStream");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 }
