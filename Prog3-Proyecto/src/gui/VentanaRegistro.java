@@ -130,6 +130,7 @@ public class VentanaRegistro extends JFrame {
     private void comprobarCoincidenciaContrasenia() {
         String contrasenia = new String(txtContrasenia.getPassword());
         String confirmarContrasenia = new String(txtConfirmarContrasenia.getPassword());
-        btnConfirmar.setEnabled(contrasenia.equals(confirmarContrasenia) && !contrasenia.isEmpty()); //habilitar boton contraseña
-    }
+        btnConfirmar.setEnabled(contrasenia.equals(confirmarContrasenia) && !contrasenia.isEmpty()); 
+    } //habilitar boton contraseña si las contraseñas son iguales. En el futuro pdoemos hacer que solo
+    //se habilite si todos los campos estan completos (escritos) 
 }
