@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,6 +29,8 @@ public class VentanaCuenta extends JFrame {
         inicializarComponentes();
         agregarComponentes();
         agregarEventos();
+        ImageIcon imagen = new ImageIcon(getClass().getResource("/imagenes/deustoStreamLogo1.png"));
+		setIconImage(imagen.getImage());
     }
 
     private void configurarVentana() {

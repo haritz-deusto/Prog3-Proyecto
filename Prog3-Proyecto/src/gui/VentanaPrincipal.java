@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +18,7 @@ public class VentanaPrincipal extends JFrame {
     private static final long serialVersionUID = 1L;
     
     private JMenuBar barraMenu;
-    private JMenuItem itemCuenta, itemPeliculas;
+    private JMenuItem itemCuenta, itemGenero1, itemGenero2, itemGenero3;
     private JMenu visualizarCuenta, visualizarPeliculas; //No se como hacerlo para que sea directo al pulsar el boton
     private JPanel panelCentro, panelSur, panelNorte, panelEste, panelOeste;
     private JLabel labelTitulo;
@@ -30,9 +32,13 @@ public class VentanaPrincipal extends JFrame {
         itemCuenta = new JMenuItem("Configurar cuenta");
         visualizarCuenta.add(itemCuenta);
         
-        visualizarPeliculas = new JMenu("Peliculas");
-        itemPeliculas = new JMenuItem("Peliculas");
-        visualizarPeliculas.add(itemPeliculas);
+        visualizarPeliculas = new JMenu("Géneros");
+        itemGenero1 = new JMenuItem("Género 1");//A cambiar con los generos adecuados
+        itemGenero2 = new JMenuItem("Género 2");
+        itemGenero3 = new JMenuItem("Género 3");
+        visualizarPeliculas.add(itemGenero1);
+        visualizarPeliculas.add(itemGenero2);
+        visualizarPeliculas.add(itemGenero3);
         
         barraMenu.add(visualizarCuenta);
         barraMenu.add(visualizarPeliculas);
@@ -67,6 +73,8 @@ public class VentanaPrincipal extends JFrame {
             ventanaCuenta.setVisible(true);
         });
         
+        ImageIcon imagen = new ImageIcon(getClass().getResource("/imagenes/deustoStreamLogo1.png"));
+		setIconImage(imagen.getImage());
         setTitle("DeustoStream");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
