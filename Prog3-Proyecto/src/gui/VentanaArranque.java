@@ -1,12 +1,18 @@
 package gui;
 
 import javax.swing.*;
+
+import main.Main;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class VentanaArranque extends JFrame {
     private static final long serialVersionUID = 1L;
+    private static Logger logger = Logger.getLogger(Main.class.getName());
 
     public VentanaArranque() {
 
@@ -66,6 +72,7 @@ public class VentanaArranque extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
                 ventanaPrincipal.setVisible(true);
+                logger.log(Level.INFO, "Se ha pulsado el botón de prueba");
             }
         });
 
@@ -74,6 +81,7 @@ public class VentanaArranque extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 VentanaRegistro ventanaRegistro = new VentanaRegistro();
                 ventanaRegistro.setVisible(true);
+                logger.log(Level.INFO, "Se ha pulsado el botón Registro");
             }
         });
 
@@ -82,6 +90,7 @@ public class VentanaArranque extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion();
                 ventanaInicioSesion.setVisible(true);
+                logger.log(Level.INFO, "Se ha pulsado el botón de Inicio de Sesión");
             }
         });
 

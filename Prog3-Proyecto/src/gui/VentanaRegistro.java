@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,9 +17,12 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import main.Main;
+
 public class VentanaRegistro extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
 
     // Componentes de la ventana
     private JLabel labelNombre, labelApellido, labelEmail, labelNumTel, labelNumTarjeta, labelContrasenia, labelConfirmarContrasenia;
@@ -110,6 +115,7 @@ public class VentanaRegistro extends JFrame {
     //método para agregar los eventos a los componentes
     private void agregarEventos() {
         btnVolver.addActionListener(e -> dispose()); // Cierra la ventana de registro
+        btnVolver.addActionListener((e) -> logger.log(Level.INFO, "Se ha pulsado el botón volver"));
 
         //Habilitar botón Confirmar solo cuando las contraseñas coincidan
         DocumentListener passwordListener = new DocumentListener() {

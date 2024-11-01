@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,9 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import main.Main;
+
 public class VentanaInicioSesion extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
 
     // Componentes de la ventana
     private JLabel labelEmail;
@@ -98,6 +103,8 @@ public class VentanaInicioSesion extends JFrame {
 
     private void agregarEventos() {
         btnVolver.addActionListener((e) -> dispose()); // Cierra la ventana
-        btnConfirmar.addActionListener(e -> System.out.println("Botón Confirmar pulsado")); // ya se le aplicara la logica
+        btnVolver.addActionListener((e) -> logger.log(Level.INFO, "Se ha pulsado el botón volver"));
+        
+        btnConfirmar.addActionListener(e -> logger.log(Level.INFO, "Se ha pulsado el botón confirmar")); // ya se le aplicara la logica
     }
 }

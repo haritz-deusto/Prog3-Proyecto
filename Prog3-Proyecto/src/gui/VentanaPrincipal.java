@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,9 +15,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import main.Main;
+
 public class VentanaPrincipal extends JFrame {
     
     private static final long serialVersionUID = 1L;
+    private static Logger logger = Logger.getLogger(Main.class.getName());
     
     private JMenuBar barraMenu;
     private JMenuItem itemCuenta, itemGenero1, itemGenero2, itemGenero3;
@@ -71,6 +76,7 @@ public class VentanaPrincipal extends JFrame {
         itemCuenta.addActionListener(e -> {
             VentanaCuenta ventanaCuenta = new VentanaCuenta();
             ventanaCuenta.setVisible(true);
+            logger.log(Level.INFO, "Se ha pulsado el botón volver");
         });
         
         ImageIcon imagen = new ImageIcon(getClass().getResource("/imagenes/deustoStreamLogo1.png"));

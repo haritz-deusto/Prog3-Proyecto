@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,9 +17,12 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import main.Main;
+
 public class VentanaCuenta extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
 
     private JLabel labelEmail, labelTelefono, labelContrasenia, labelConfirmarContrasenia;
     private JTextField txtEmail, txtTelefono;
@@ -88,7 +93,8 @@ public class VentanaCuenta extends JFrame {
 
     private void agregarEventos() {
         btnVolver.addActionListener(e -> dispose());
-
+        btnVolver.addActionListener((e) -> logger.log(Level.INFO, "Se ha pulsado el botón volver"));
+        
         DocumentListener passwordListener = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
