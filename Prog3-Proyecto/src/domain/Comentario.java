@@ -8,8 +8,8 @@ public class Comentario extends Pelicula{
 	protected LocalDate fecha;
 
 	public Comentario(String titulo, int duracion, String descripcion, Genero genero, Valoracion estrellas,
-			Usuario usuario, String texto, LocalDate fecha) {
-		super(titulo, duracion, descripcion, genero, estrellas);
+			String rutaFoto, Usuario usuario, String texto, LocalDate fecha) {
+		super(titulo, duracion, descripcion, genero, estrellas, rutaFoto);
 		this.usuario = usuario;
 		this.texto = texto;
 		this.fecha = fecha;

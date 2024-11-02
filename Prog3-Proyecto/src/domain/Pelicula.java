@@ -6,14 +6,16 @@ public class Pelicula {
 	private String descripcion;
 	protected Genero genero;
 	protected Valoracion estrellas;
+	private String rutaFoto;
 	
-	public Pelicula(String titulo, int duracion, String descripcion, Genero genero, Valoracion estrellas) {
+	public Pelicula(String titulo, int duracion, String descripcion, Genero genero, Valoracion estrellas, String rutaFoto) {
 		super();
 		this.titulo = titulo;
 		this.duracion = duracion;
 		this.descripcion = descripcion;
 		this.genero = genero;
 		this.estrellas = estrellas;
+		this.rutaFoto = rutaFoto;
 	}
 	public Pelicula() {
 		super();
@@ -52,10 +54,20 @@ public class Pelicula {
 	public void setEstrellas(Valoracion estrellas) {
 		this.estrellas = estrellas;
 	}
-	
+	public String getRutaFoto() {
+		return rutaFoto;
+	}
+	public void setRutaFoto(String rutaFoto) {
+		this.rutaFoto = rutaFoto;
+	}
 	@Override
 	public String toString() {
-		return "Pelicula [titulo=" + titulo + ", duracion=" + duracion + ", descripcion=" + descripcion + ", genero=" + genero + ", estrellas=" + estrellas + "]";
+		return "Pelicula [titulo=" + titulo + ", duracion=" + duracion + ", descripcion=" + descripcion + ", genero="
+				+ genero + ", estrellas=" + estrellas + ", rutaFoto=" + rutaFoto + "]";
 	}
+	
+	
+
+
 
 }
