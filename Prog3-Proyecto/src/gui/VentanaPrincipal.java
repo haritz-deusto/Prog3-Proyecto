@@ -103,7 +103,20 @@ public class VentanaPrincipal extends JFrame {
             modeloTabla.addRow(new Object[]{posterIcon, pelicula.getTitulo()});
         }
         
+        tablaPeliculas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = tablaPeliculas.rowAtPoint(evt.getPoint());
+                if (row >= 0) {
+                    Pelicula pelicula = Contenedora.getLPeliculas().get(row);
+                    new VentanaPelicula(pelicula).setVisible(true);
+                    logger.log(Level.INFO, "Se ha pulsado el botón pelicula para: " + pelicula.getTitulo() + ".");
+                }
+            }
+        });
+        
         JScrollPane scrollTabla = new JScrollPane(tablaPeliculas);
         panelCentro.add(scrollTabla, BorderLayout.CENTER);
     }
+    
+    
 }
