@@ -20,6 +20,8 @@ public class Main {
 		// logger.info("Se ha mostrado un mensaje en consola");
 		// logger.warning("Mensaje de warning"); logger.severe("Mensaje de error");
 		
+		Contenedora.cargarPeliculas();
+		
 		VentanaArranque ventanaArranque = new VentanaArranque();
 	}
 }

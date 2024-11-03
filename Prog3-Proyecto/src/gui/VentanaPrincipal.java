@@ -98,7 +98,7 @@ public class VentanaPrincipal extends JFrame {
         tablaPeliculas.setRowHeight(200);
         tablaPeliculas.setDefaultRenderer(Object.class, new RenderTablaPeliculas());
         
-        for (Pelicula pelicula : Contenedora.getLPeliculas()) { //no funciona no se porque
+        for (Pelicula pelicula : Contenedora.getLPeliculas()) {
             ImageIcon posterIcon = new ImageIcon(getClass().getResource(pelicula.getRutaFoto()));
             modeloTabla.addRow(new Object[]{posterIcon, pelicula.getTitulo()});
         }
