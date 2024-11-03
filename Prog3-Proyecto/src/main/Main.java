@@ -2,6 +2,9 @@ package main;
 
 import gui.VentanaArranque;
 import java.util.logging.Logger;
+
+import domain.Contenedora;
+
 import java.util.logging.Level;
 
 public class Main {

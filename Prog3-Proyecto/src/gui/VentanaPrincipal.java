@@ -13,8 +13,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
+import domain.Contenedora;
+import domain.Pelicula;
 import main.Main;
 
 public class VentanaPrincipal extends JFrame {
@@ -24,11 +28,12 @@ public class VentanaPrincipal extends JFrame {
     
     private JMenuBar barraMenu;
     private JMenuItem itemCuenta, itemGenero1, itemGenero2, itemGenero3;
-    private JMenu visualizarCuenta, visualizarPeliculas; //No se como hacerlo para que sea directo al pulsar el boton
+    private JMenu visualizarCuenta, visualizarPeliculas;
     private JPanel panelCentro, panelSur, panelNorte, panelEste, panelOeste;
     private JLabel labelTitulo;
     private JButton btnVolver;
-    
+    private JTable tablaPeliculas;
+
     public VentanaPrincipal() {
         
         barraMenu = new JMenuBar();
@@ -38,7 +43,7 @@ public class VentanaPrincipal extends JFrame {
         visualizarCuenta.add(itemCuenta);
         
         visualizarPeliculas = new JMenu("Géneros");
-        itemGenero1 = new JMenuItem("Género 1");//A cambiar con los generos adecuados
+        itemGenero1 = new JMenuItem("Género 1");
         itemGenero2 = new JMenuItem("Género 2");
         itemGenero3 = new JMenuItem("Género 3");
         visualizarPeliculas.add(itemGenero1);
@@ -48,7 +53,7 @@ public class VentanaPrincipal extends JFrame {
         barraMenu.add(visualizarCuenta);
         barraMenu.add(visualizarPeliculas);
         
-        panelCentro = new JPanel();
+        panelCentro = new JPanel(new BorderLayout());
         panelNorte = new JPanel(new BorderLayout());
         panelSur = new JPanel();
         panelEste = new JPanel();
@@ -67,12 +72,10 @@ public class VentanaPrincipal extends JFrame {
         getContentPane().add(panelCentro, BorderLayout.CENTER);
         
         panelSur.add(btnVolver);
-        
         panelNorte.add(labelTitulo, BorderLayout.NORTH);
         panelNorte.add(barraMenu, BorderLayout.CENTER);
         
         btnVolver.addActionListener(e -> dispose());
-        
         itemCuenta.addActionListener(e -> {
             VentanaCuenta ventanaCuenta = new VentanaCuenta();
             ventanaCuenta.setVisible(true);
@@ -80,9 +83,27 @@ public class VentanaPrincipal extends JFrame {
         });
         
         ImageIcon imagen = new ImageIcon(getClass().getResource("/imagenes/deustoStreamLogo1.png"));
-		setIconImage(imagen.getImage());
+        setIconImage(imagen.getImage());
         setTitle("DeustoStream");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        configurarTablaPeliculas();
+    }
+
+    private void configurarTablaPeliculas() {
+        ModeloTablaPeliculas modeloTabla = new ModeloTablaPeliculas();
+        
+        tablaPeliculas = new JTable(modeloTabla);
+        tablaPeliculas.setRowHeight(200);
+        tablaPeliculas.setDefaultRenderer(Object.class, new RenderTablaPeliculas());
+        
+        for (Pelicula pelicula : Contenedora.getLPeliculas()) { //no funciona no se porque
+            ImageIcon posterIcon = new ImageIcon(getClass().getResource(pelicula.getRutaFoto()));
+            modeloTabla.addRow(new Object[]{posterIcon, pelicula.getTitulo()});
+        }
+        
+        JScrollPane scrollTabla = new JScrollPane(tablaPeliculas);
+        panelCentro.add(scrollTabla, BorderLayout.CENTER);
     }
 }

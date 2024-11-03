@@ -26,13 +26,13 @@ public class Contenedora {
 	
 	
 	public static void cargarPeliculas() {
-		Pelicula p1 = new Pelicula("Titulo1", 180, "Descripcion1", Genero.ACCION, Valoracion.DOS_ESTRELLAS, "introducir ruta");
-		Pelicula p2 = new Pelicula("Titulo2", 150, "Descripcion2", Genero.DRAMA, Valoracion.CINCO_ESTRELLAS, "introducir ruta");
-		Pelicula p3 = new Pelicula("Titulo3", 210, "Descripcion3", Genero.MUSICAL, Valoracion.CUATRO_ESTRELLAS, "introducir ruta");
-		Pelicula p4 = new Pelicula("Titulo4", 120, "Descripcion4", Genero.CIENCIA_FICCION, Valoracion.UNA_ESTRELLA, "introducir ruta");
-		lPeliculas.add(p1);
-		lPeliculas.add(p2);
-		lPeliculas.add(p3);
-		lPeliculas.add(p4);
+	    Pelicula p1 = new Pelicula("Titulo1", 180, "Descripcion1", Genero.ACCION, Valoracion.DOS_ESTRELLAS, "/imagenes/deustoStreamLogo1.png");
+	    Pelicula p2 = new Pelicula("Titulo2", 150, "Descripcion2", Genero.DRAMA, Valoracion.CINCO_ESTRELLAS, "/imagenes/deustoStreamLogo1.png");
+	    Pelicula p3 = new Pelicula("Titulo3", 210, "Descripcion3", Genero.MUSICAL, Valoracion.CUATRO_ESTRELLAS, "/imagenes/deustoStreamLogo1.png");
+	    Pelicula p4 = new Pelicula("Titulo4", 120, "Descripcion4", Genero.CIENCIA_FICCION, Valoracion.UNA_ESTRELLA, "/imagenes/deustoStreamLogo1.png");
+	    lPeliculas.add(p1);
+	    lPeliculas.add(p2);
+	    lPeliculas.add(p3);
+	    lPeliculas.add(p4);
 	}
 }
