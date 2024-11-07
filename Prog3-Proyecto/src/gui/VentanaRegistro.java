@@ -4,6 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -66,7 +75,64 @@ public class VentanaRegistro extends JFrame {
 
         btnVolver = new JButton("Volver");
         btnConfirmar = new JButton("Confirmar");
+        
+        btnConfirmar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String n = txtNombre.getText();
+				String em = txtEmail.getText();
+				String c = txtContrasenia.getText();
+				boolean esta = comprobarRegistro(em);
+				if(esta) {
+					JOptionPane.showMessageDialog(null, "Ese email ya está registrado. Inténtalo con otro.");
+				}else {
+					registrarUsuario(n, "", em, "", "", c);
+					JOptionPane.showMessageDialog(null, "Usuario registrado correctamente.");
+				}
+				limpiarCampos();
+			}
+		});
         btnConfirmar.setEnabled(false); //desactivado hasta confirmar las 2 contrasenas
+    }
+    
+    private void limpiarCampos() {
+    	txtNombre.setText("");
+    	//limpiar todos
+    }
+    private void registrarUsuario(String n, String a, String e, String nt, String nta, String c) {
+    	File f = new File("usuarios.txt");
+    	try {
+			PrintWriter pw = new PrintWriter(new FileWriter(f, true));
+			pw.println(n+";"+a+";"+e+";"+nt+";"+nta+";"+c);
+			pw.flush();
+			pw.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+    }
+    
+    private boolean comprobarRegistro(String e) {
+    	boolean repetido = false;
+    	File f = new File("usuarios.txt");
+    	if(f.exists()) {
+    		try {
+				Scanner sc = new Scanner(f);
+				while(sc.hasNextLine()) {
+					String linea = sc.nextLine();
+					// linea = "n;a;e;nt;nta;co"
+					String [] partes = linea.split(";");
+					if(partes[2].equals(e)) {
+						repetido = true;
+					}
+				}
+				sc.close();
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+    		
+    	}
+    	return repetido;
     }
 
     // Método para agregar los componentes al panel principal con GridBagLayout

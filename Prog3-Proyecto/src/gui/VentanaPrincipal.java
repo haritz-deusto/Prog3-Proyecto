@@ -89,6 +89,7 @@ public class VentanaPrincipal extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         configurarTablaPeliculas();
+        setVisible(true);
     }
 
     private void configurarTablaPeliculas() {

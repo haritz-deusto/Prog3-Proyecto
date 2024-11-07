@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -101,10 +105,42 @@ public class VentanaInicioSesion extends JFrame {
         panel.add(componente, gbc);
     }
 
+    private boolean inicioCorrecto(String em, String c) {
+    	boolean correcto = false;
+    	File f = new File("usuarios.txt");
+    	if(f.exists()) {
+    		try {
+				Scanner sc = new Scanner(f);
+				while(sc.hasNextLine()) {
+					String linea = sc.nextLine();
+					// linea = "n;a;e;nt;nta;co"
+					String [] partes = linea.split(";");
+					if(partes[2].equals(em) && partes[5].equals(c)) {
+						correcto = true;
+					}
+				}
+				sc.close();
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+    		
+    	}
+    	return correcto;
+    }
     private void agregarEventos() {
         btnVolver.addActionListener((e) -> dispose()); // Cierra la ventana
         btnVolver.addActionListener((e) -> logger.log(Level.INFO, "Se ha pulsado el botón volver"));
         
-        btnConfirmar.addActionListener(e -> logger.log(Level.INFO, "Se ha pulsado el botón confirmar")); // ya se le aplicara la logica
+        btnConfirmar.addActionListener((e)->{
+        	logger.log(Level.INFO, "Se ha pulsado el botón confirmar"); // ya se le aplicara la logica
+        	String em = txtEmail.getText();
+        	String c = txtContrasenia.getText();
+        	boolean correcto = inicioCorrecto(em, c);
+        	if(correcto) {
+        		new VentanaPrincipal();
+        	}else {
+        		JOptionPane.showMessageDialog(null, "Email y/o contraseña incorrectos", "ERROR INICIO SESIÓN", JOptionPane.ERROR_MESSAGE);
+        	}
+        });
     }
 }
