@@ -81,13 +81,16 @@ public class VentanaRegistro extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String n = txtNombre.getText();
+				String a = txtApellido.getText();
 				String em = txtEmail.getText();
+				String nt = txtNumTel.getText();
+				String nta = txtNumTarjeta.getText();
 				String c = txtContrasenia.getText();
 				boolean esta = comprobarRegistro(em);
 				if(esta) {
 					JOptionPane.showMessageDialog(null, "Ese email ya está registrado. Inténtalo con otro.");
 				}else {
-					registrarUsuario(n, "", em, "", "", c);
+					registrarUsuario(n, a, em, nt, nta, c);
 					JOptionPane.showMessageDialog(null, "Usuario registrado correctamente.");
 				}
 				limpiarCampos();
@@ -98,7 +101,12 @@ public class VentanaRegistro extends JFrame {
     
     private void limpiarCampos() {
     	txtNombre.setText("");
-    	//limpiar todos
+    	txtApellido.setText("");
+    	txtEmail.setText("");
+    	txtNumTel.setText("");
+    	txtNumTarjeta.setText("");
+    	txtContrasenia.setText("");
+    	txtConfirmarContrasenia.setText("");
     }
     private void registrarUsuario(String n, String a, String e, String nt, String nta, String c) {
     	File f = new File("usuarios.txt");
@@ -120,7 +128,7 @@ public class VentanaRegistro extends JFrame {
 				Scanner sc = new Scanner(f);
 				while(sc.hasNextLine()) {
 					String linea = sc.nextLine();
-					// linea = "n;a;e;nt;nta;co"
+					//linea = "n;a;e;nt;nta;co"
 					String [] partes = linea.split(";");
 					if(partes[2].equals(e)) {
 						repetido = true;

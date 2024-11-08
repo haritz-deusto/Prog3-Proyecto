@@ -141,6 +141,11 @@ public class VentanaInicioSesion extends JFrame {
         	}else {
         		JOptionPane.showMessageDialog(null, "Email y/o contraseña incorrectos", "ERROR INICIO SESIÓN", JOptionPane.ERROR_MESSAGE);
         	}
+        	limpiarCampos();
         });
+    }
+    private void limpiarCampos() {
+    	txtEmail.setText("");
+    	txtContrasenia.setText("");
     }
 }
