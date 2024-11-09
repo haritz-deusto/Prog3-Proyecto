@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +29,7 @@ import javax.swing.table.TableRowSorter;
 
 import domain.Contenedora;
 import domain.Pelicula;
+import domain.Usuario;
 import main.Main;
 
 public class VentanaPrincipal extends JFrame {
@@ -43,6 +45,7 @@ public class VentanaPrincipal extends JFrame {
     private JButton btnVolver;
     private JTable tablaPeliculas;
     private TableRowSorter<ModeloTablaPeliculas> sorter;
+    private List<Usuario> usuarios;
 
     public VentanaPrincipal() {
         barraMenu = new JMenuBar();
@@ -161,7 +164,8 @@ public class VentanaPrincipal extends JFrame {
             public void mouseClicked(MouseEvent evt) {
                 int row = tablaPeliculas.rowAtPoint(evt.getPoint());
                 if (row >= 0) {
-                    Pelicula pelicula = Contenedora.getLPeliculas().get(row);
+                	int modelRow = tablaPeliculas.convertRowIndexToModel(row);
+                    Pelicula pelicula = Contenedora.getLPeliculas().get(modelRow);
                     new VentanaPelicula(pelicula).setVisible(true);
                     logger.log(Level.INFO, "Se ha pulsado el botón película para: " + pelicula.getTitulo() + ".");
                 }
