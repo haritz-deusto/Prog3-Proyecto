@@ -36,7 +36,7 @@ public class VentanaPrincipal extends JFrame {
     private static Logger logger = Logger.getLogger(Main.class.getName());
     
     private JMenuBar barraMenu;
-    private JMenuItem itemCuenta, itemGenero1, itemGenero2, itemGenero3, itemBuscar;
+    private JMenuItem itemCuenta, itemGenero1, itemGenero2, itemGenero3, itemGenero4, itemBuscar;
     private JMenu visualizarCuenta, visualizarPeliculas;
     private JPanel panelCentro, panelSur, panelNorte, panelEste, panelOeste;
     private JLabel labelTitulo;
@@ -52,12 +52,14 @@ public class VentanaPrincipal extends JFrame {
         visualizarCuenta.add(itemCuenta);
         
         visualizarPeliculas = new JMenu("Géneros");
-        itemGenero1 = new JMenuItem("Género 1");
-        itemGenero2 = new JMenuItem("Género 2");
-        itemGenero3 = new JMenuItem("Género 3");
+        itemGenero1 = new JMenuItem("Ciencia Ficción");
+        itemGenero2 = new JMenuItem("Drama");
+        itemGenero3 = new JMenuItem("Musical");
+        itemGenero4 = new JMenuItem("Comedia");
         visualizarPeliculas.add(itemGenero1);
         visualizarPeliculas.add(itemGenero2);
         visualizarPeliculas.add(itemGenero3);
+        visualizarPeliculas.add(itemGenero4);
         
         itemBuscar = new JMenuItem("Buscar");
         
@@ -88,6 +90,12 @@ public class VentanaPrincipal extends JFrame {
         panelNorte.add(barraMenu, BorderLayout.CENTER);
         
         btnVolver.addActionListener(e -> dispose());
+        
+        itemGenero1.addActionListener(e -> filtrarPorGenero("CIENCIA_FICCION"));
+        itemGenero2.addActionListener(e -> filtrarPorGenero("DRAMA"));
+        itemGenero3.addActionListener(e -> filtrarPorGenero("MUSICAL"));
+        itemGenero4.addActionListener(e -> filtrarPorGenero("COMEDIA"));
+        
         itemCuenta.addActionListener(e -> {
             VentanaCuenta ventanaCuenta = new VentanaCuenta();
             ventanaCuenta.setVisible(true);
@@ -154,6 +162,11 @@ public class VentanaPrincipal extends JFrame {
         JScrollPane scrollTabla = new JScrollPane(tablaPeliculas);
         scrollTabla.setBorder(new EmptyBorder(10, 10, 10, 10));
         panelCentro.add(scrollTabla, BorderLayout.CENTER);
+    }
+    
+    private void filtrarPorGenero(String genero) {
+        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + genero, 1));
+        logger.log(Level.INFO, "Filtrando películas por género: " + genero);
     }
     
     private void buscarPelicula(String titulo) {
