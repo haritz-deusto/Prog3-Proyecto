@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 import domain.Pelicula;
+import domain.Valoracion;
 import main.Main;
 
 import java.awt.*;
@@ -47,8 +48,12 @@ public class VentanaPelicula extends JFrame {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         panelContenido.add(scrollPane, BorderLayout.CENTER);
         
+        JLabel labelValoracion = new JLabel("Valoración: " + convertirValoracionAEstrellas(pelicula.getEstrellas()));
+        labelValoracion.setFont(new Font("Serif", Font.BOLD, 18));
+        labelValoracion.setForeground(new Color(50, 50, 50));
+        panelContenido.add(labelValoracion, BorderLayout.SOUTH);
+        
         JPanel panelBoton = new JPanel();
-        panelBoton.setBackground(new Color(245, 245, 245));
         JButton btnVolver = new JButton("Volver");
         btnVolver.setFont(new Font("Arial", Font.BOLD, 16));
         btnVolver.setForeground(Color.WHITE);
@@ -64,5 +69,15 @@ public class VentanaPelicula extends JFrame {
         getContentPane().setBackground(Color.WHITE);
         
         setVisible(true);
+    }
+    private String convertirValoracionAEstrellas(Valoracion valoracion) {
+        switch (valoracion) {
+            case UNA_ESTRELLA: return "★☆☆☆☆";
+            case DOS_ESTRELLAS: return "★★☆☆☆";
+            case TRES_ESTRELLAS: return "★★★☆☆";
+            case CUATRO_ESTRELLAS: return "★★★★☆";
+            case CINCO_ESTRELLAS: return "★★★★★";
+            default: return "";
+        }
     }
 }

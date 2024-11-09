@@ -36,9 +36,9 @@ public class VentanaPrincipal extends JFrame {
     private static Logger logger = Logger.getLogger(Main.class.getName());
     
     private JMenuBar barraMenu;
-    private JMenuItem itemCuenta, itemGenero1, itemGenero2, itemGenero3, itemGenero4, itemBuscar;
+    private JMenuItem itemCuenta, itemGenero1, itemGenero2, itemGenero3, itemGenero4, itemGenero5, itemGenero6, itemGenero7, itemBuscar;
     private JMenu visualizarCuenta, visualizarPeliculas;
-    private JPanel panelCentro, panelSur, panelNorte, panelEste, panelOeste;
+    private JPanel panelCentro, panelSur, panelNorte, panelEste, panelOeste; 
     private JLabel labelTitulo;
     private JButton btnVolver;
     private JTable tablaPeliculas;
@@ -56,10 +56,16 @@ public class VentanaPrincipal extends JFrame {
         itemGenero2 = new JMenuItem("Drama");
         itemGenero3 = new JMenuItem("Musical");
         itemGenero4 = new JMenuItem("Comedia");
+        itemGenero5 = new JMenuItem("Animación");
+        itemGenero6 = new JMenuItem("Fantasia");
+        itemGenero7 = new JMenuItem("Romance");
         visualizarPeliculas.add(itemGenero1);
         visualizarPeliculas.add(itemGenero2);
         visualizarPeliculas.add(itemGenero3);
         visualizarPeliculas.add(itemGenero4);
+        visualizarPeliculas.add(itemGenero5);
+        visualizarPeliculas.add(itemGenero6);
+        visualizarPeliculas.add(itemGenero7);
         
         itemBuscar = new JMenuItem("Buscar");
         
@@ -95,6 +101,9 @@ public class VentanaPrincipal extends JFrame {
         itemGenero2.addActionListener(e -> filtrarPorGenero("DRAMA"));
         itemGenero3.addActionListener(e -> filtrarPorGenero("MUSICAL"));
         itemGenero4.addActionListener(e -> filtrarPorGenero("COMEDIA"));
+        itemGenero5.addActionListener(e -> filtrarPorGenero("ANIMACION"));
+        itemGenero6.addActionListener(e -> filtrarPorGenero("FANTASIA"));
+        itemGenero7.addActionListener(e -> filtrarPorGenero("ROMANCE"));
         
         itemCuenta.addActionListener(e -> {
             VentanaCuenta ventanaCuenta = new VentanaCuenta();
@@ -176,4 +185,5 @@ public class VentanaPrincipal extends JFrame {
             sorter.setRowFilter(null); //elimina el filtro si no hay nada escrito
         }
     }
+    
 }
