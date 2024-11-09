@@ -1,3 +1,2 @@
-1;;1;;;1
 ruben;alonso;r.alonso@opendeusto.es;666666666;123412341234;1234
-2;2;2;2;2;2
+2;2;2;2;2;hola
