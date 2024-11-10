@@ -109,7 +109,7 @@ public class VentanaPrincipal extends JFrame {
         itemGenero7.addActionListener(e -> filtrarPorGenero("ROMANCE"));
         
         itemCuenta.addActionListener(e -> {
-            VentanaCuenta ventanaCuenta = new VentanaCuenta();
+            VentanaConfigurarCuenta ventanaCuenta = new VentanaConfigurarCuenta();
             ventanaCuenta.setVisible(true);
             logger.log(Level.INFO, "Se ha pulsado el botón volver");
         });

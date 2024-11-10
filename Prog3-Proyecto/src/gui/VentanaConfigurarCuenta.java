@@ -30,7 +30,7 @@ import javax.swing.event.DocumentListener;
 
 import main.Main;
 
-public class VentanaCuenta extends JFrame {
+public class VentanaConfigurarCuenta extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private static final Logger logger = Logger.getLogger(Main.class.getName());
@@ -40,7 +40,7 @@ public class VentanaCuenta extends JFrame {
     private JPasswordField txtContrasenia, txtConfirmarContrasenia;
     private JButton btnGuardarCambios, btnVolver;
 
-    public VentanaCuenta() {
+    public VentanaConfigurarCuenta() {
         configurarVentana();
         inicializarComponentes();
         agregarComponentes();
@@ -60,7 +60,7 @@ public class VentanaCuenta extends JFrame {
     private void inicializarComponentes() {
         labelEmail = new JLabel("Email:");
         labelTelefono = new JLabel("Teléfono:");
-        labelContrasenia = new JLabel("Contraseña:");
+        labelContrasenia = new JLabel("Nueva Contraseña:");
         labelConfirmarContrasenia = new JLabel("Confirmar contraseña:");
 
         txtEmail = new JTextField(20);
