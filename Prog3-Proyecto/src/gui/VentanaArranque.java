@@ -31,6 +31,9 @@ public class VentanaArranque extends JFrame {
         //BOTONES
         JButton botonInicioSesion = new JButton("Iniciar Sesión");
         botonInicioSesion.setToolTipText("Haz clic para iniciar sesión");
+        
+        JButton botonInicioSesionAdmin = new JButton("ADMIN");
+        botonInicioSesionAdmin.setToolTipText("Haz clic para iniciar sesión como ADMIN");
 
         JButton botonRegistro = new JButton("Registrarse");
         botonRegistro.setToolTipText("Haz clic para registrarte");
@@ -43,6 +46,11 @@ public class VentanaArranque extends JFrame {
         botonInicioSesion.setForeground(Color.WHITE); 
         botonInicioSesion.setFont(new Font("Arial", Font.BOLD, 14)); 
         botonInicioSesion.setPreferredSize(new Dimension(150, 40)); 
+        
+        botonInicioSesionAdmin.setBackground(new Color(0, 123, 255)); // Color fondo azul
+        botonInicioSesionAdmin.setForeground(Color.WHITE); 
+        botonInicioSesionAdmin.setFont(new Font("Arial", Font.BOLD, 14)); 
+        botonInicioSesionAdmin.setPreferredSize(new Dimension(150, 40));
 
         botonRegistro.setBackground(new Color(0, 123, 255)); // Color de fondo azul
         botonRegistro.setForeground(Color.WHITE); 
@@ -59,6 +67,7 @@ public class VentanaArranque extends JFrame {
         panelInferior.add(botonPrueba);
         panelInferior.add(botonInicioSesion);
         panelInferior.add(botonRegistro);
+        panelInferior.add(botonInicioSesionAdmin);
 
         //PANEL CENTRAL
         panelCentral.setBackground(Color.LIGHT_GRAY); 
@@ -91,6 +100,15 @@ public class VentanaArranque extends JFrame {
                 VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion();
                 ventanaInicioSesion.setVisible(true);
                 logger.log(Level.INFO, "Se ha pulsado el botón de Inicio de Sesión");
+            }
+        });
+        
+        botonInicioSesionAdmin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VentanaInicioSesionAdmin ventanaInicioSesionAdmin = new VentanaInicioSesionAdmin();
+                ventanaInicioSesionAdmin.setVisible(true);
+                logger.log(Level.INFO, "Se ha pulsado el botón de Inicio de Sesión como ADMIN");
             }
         });
 
