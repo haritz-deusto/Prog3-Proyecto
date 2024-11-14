@@ -1,6 +1,6 @@
 package main;
 
-import gui.VentanaArranque1;
+import gui.VentanaArranque;
 import java.util.logging.Logger;
 
 import domain.Contenedora;
@@ -22,6 +22,6 @@ public class Main {
 		
 		Contenedora.cargarPeliculas();
 		
-		VentanaArranque1 ventanaArranque = new VentanaArranque1();
+		VentanaArranque ventanaArranque = new VentanaArranque();
 	}
 }

@@ -21,9 +21,9 @@ import javax.swing.JTextField;
 
 import main.Main;
 
-public class VentanaInicioSesionAdmin1 extends JFrame{
-	
-	private static final long serialVersionUID = 1L;
+public class VentanaInicioSesion extends JFrame {
+
+    private static final long serialVersionUID = 1L;
     private static final Logger logger = Logger.getLogger(Main.class.getName());
 
     // Componentes de la ventana
@@ -36,16 +36,16 @@ public class VentanaInicioSesionAdmin1 extends JFrame{
     private JButton btnVolver;
     private JButton btnConfirmar;
 
-    public VentanaInicioSesionAdmin1() {
-        configurarVentanaAdmin();
+    public VentanaInicioSesion() {
+        configurarVentana();
         inicializarComponentes();
         agregarComponentes();
         agregarEventos();
     }
 
     // Método para configurar las propiedades de la ventana
-    private void configurarVentanaAdmin() {
-        setTitle("Inicio de Sesión como ADMIN");
+    private void configurarVentana() {
+        setTitle("Inicio de Sesión");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null); 
@@ -107,7 +107,7 @@ public class VentanaInicioSesionAdmin1 extends JFrame{
 
     private boolean inicioCorrecto(String em, String c) {
     	boolean correcto = false;
-    	File f = new File("admin.txt");
+    	File f = new File("usuarios.txt");
     	if(f.exists()) {
     		try {
 				Scanner sc = new Scanner(f);

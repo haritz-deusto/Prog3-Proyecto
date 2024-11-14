@@ -10,11 +10,11 @@ import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VentanaArranque1 extends JFrame {
+public class VentanaArranque extends JFrame {
     private static final long serialVersionUID = 1L;
     private static Logger logger = Logger.getLogger(Main.class.getName());
 
-    public VentanaArranque1() {
+    public VentanaArranque() {
 
         JPanel panelCentral = new JPanel(new BorderLayout());
         JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Espaciado entre botones
@@ -97,7 +97,7 @@ public class VentanaArranque1 extends JFrame {
         botonInicioSesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                VentanaInicioSesion1 ventanaInicioSesion = new VentanaInicioSesion1();
+                VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion();
                 ventanaInicioSesion.setVisible(true);
                 logger.log(Level.INFO, "Se ha pulsado el botón de Inicio de Sesión");
             }
@@ -106,7 +106,7 @@ public class VentanaArranque1 extends JFrame {
         botonInicioSesionAdmin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                VentanaInicioSesionAdmin1 ventanaInicioSesionAdmin = new VentanaInicioSesionAdmin1();
+                VentanaInicioSesionAdmin ventanaInicioSesionAdmin = new VentanaInicioSesionAdmin();
                 ventanaInicioSesionAdmin.setVisible(true);
                 logger.log(Level.INFO, "Se ha pulsado el botón de Inicio de Sesión como ADMIN");
             }
