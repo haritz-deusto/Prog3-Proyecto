@@ -137,7 +137,9 @@ public class VentanaInicioSesionAdmin extends JFrame{
         	String c = txtContrasenia.getText();
         	boolean correcto = inicioCorrecto(em, c);
         	if(correcto) {
-        		new VentanaPrincipal();
+        		VentanaAdmin ventanaAdmin = new VentanaAdmin();
+        		ventanaAdmin.setVisible(true);
+        		dispose();
         	}else {
         		JOptionPane.showMessageDialog(null, "Email y/o contraseña incorrectos", "ERROR INICIO SESIÓN", JOptionPane.ERROR_MESSAGE);
         	}
