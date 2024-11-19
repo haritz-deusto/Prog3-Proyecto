@@ -3,8 +3,11 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.JOptionPane;
@@ -70,7 +74,7 @@ public class VentanaPrincipal extends JFrame {
         visualizarPeliculas.add(itemGenero6);
         visualizarPeliculas.add(itemGenero7);
         
-        itemBuscar = new JMenuItem("Buscar");
+        itemBuscar = new JMenu("Buscar");
         
         barraMenu.add(visualizarCuenta);
         barraMenu.add(visualizarPeliculas);
@@ -113,15 +117,21 @@ public class VentanaPrincipal extends JFrame {
             ventanaCuenta.setVisible(true);
             logger.log(Level.INFO, "Se ha pulsado el botón volver");
         });
+        itemBuscar.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				/*String titulo = JOptionPane.showInputDialog(null, "Ingrese el título de la película:", "Buscar Película", JOptionPane.PLAIN_MESSAGE);
+	            if (titulo != null) {
+	                buscarPelicula(titulo);
+	                logger.log(Level.INFO, "Se ha buscado la pelicula: " + titulo);
+	            }*/
+				new InputDialog(tablaPeliculas);
+				tablaPeliculas.repaint();
+	        
+			}
+		});
         
-        itemBuscar.addActionListener(e -> {
-            String titulo = JOptionPane.showInputDialog(this, "Ingrese el título de la película:", "Buscar Película", JOptionPane.PLAIN_MESSAGE);
-            if (titulo != null) {
-                buscarPelicula(titulo);
-                logger.log(Level.INFO, "Se ha buscado la pelicula: " + titulo);
-            }
-        });
-
         ImageIcon imagen = new ImageIcon(getClass().getResource("/imagenes/deustoStreamLogo1.png"));
         setIconImage(imagen.getImage());
         setTitle("DeustoStream");
