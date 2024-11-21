@@ -18,11 +18,17 @@ import domain.Contenedora;
 import domain.Pelicula;
 
 public class InputDialog extends JDialog{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lblTexto;
 	private JTextField txtTexto;
 	private JPanel pSur,pCentro;
 	public InputDialog(JTable tabla) {
 		setBounds(500, 400, 300, 100);
+		setTitle("Ventana de busqueda");
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		txtTexto = new JTextField(20);
 		lblTexto = new JLabel("Introduzca el título: ");
 		pSur = new JPanel();
@@ -36,36 +42,42 @@ public class InputDialog extends JDialog{
 		txtTexto.getDocument().addDocumentListener(new DocumentListener() {
 			
 			@Override
-			public void removeUpdate(DocumentEvent e) {
-				String texto = txtTexto.getText();
-				ModeloTablaPeliculas modeloTabla = (ModeloTablaPeliculas) tabla.getModel();
-				modeloTabla.setRowCount(0);
-				for(Pelicula p : Contenedora.getLPeliculas()) {
-					if(p.getTitulo().contains(texto)) {
-						ImageIcon posterIcon = new ImageIcon(getClass().getResource(p.getRutaFoto()));
-			            String tituloConGenero = p.getTitulo() + " - " + p.getGenero();
-			            modeloTabla.addRow(new Object[]{posterIcon, tituloConGenero});
-					}
-				}
-				tabla.setModel(modeloTabla);
-				tabla.repaint();
-			}
-			
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				String texto = txtTexto.getText();
-				ModeloTablaPeliculas modeloTabla = (ModeloTablaPeliculas) tabla.getModel();
-				modeloTabla.setRowCount(0);
-				for(Pelicula p : Contenedora.getLPeliculas()) {
-					if(p.getTitulo().contains(texto)) {
-						ImageIcon posterIcon = new ImageIcon(getClass().getResource(p.getRutaFoto()));
-			            String tituloConGenero = p.getTitulo() + " - " + p.getGenero();
-			            modeloTabla.addRow(new Object[]{posterIcon, tituloConGenero});
-					}
-				}
-				tabla.setModel(modeloTabla);
-				tabla.repaint();
-			}
+            public void removeUpdate(DocumentEvent e) {
+                filtrarPeliculas(tabla);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filtrarPeliculas(tabla);
+            }
+
+           
+      
+    private void filtrarPeliculas(JTable tabla) {
+
+        String texto = txtTexto.getText().toLowerCase().replaceAll("\\s+", "");
+
+
+        ModeloTablaPeliculas modeloTabla = (ModeloTablaPeliculas) tabla.getModel();
+        modeloTabla.setRowCount(0);
+
+
+        for (Pelicula p : Contenedora.getLPeliculas()) {
+
+            String tituloNormalizado = p.getTitulo().toLowerCase().replaceAll("\\s+", "");
+
+
+            if (tituloNormalizado.contains(texto)) {
+
+                ImageIcon posterIcon = new ImageIcon(getClass().getResource(p.getRutaFoto()));
+                String tituloConGenero = p.getTitulo() + " - " + p.getGenero();
+                modeloTabla.addRow(new Object[]{posterIcon, tituloConGenero});
+            }
+        }
+
+
+        tabla.repaint();
+    }
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
