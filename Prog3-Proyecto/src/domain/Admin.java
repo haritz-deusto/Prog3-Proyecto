@@ -11,4 +11,13 @@ public class Admin extends Usuario {
 		super(nombre, apellido, dni, email, contrasenia, numTel, numTarjeta);
 	}
 
+	public int setNumTarjeta(int int1) {
+		
+		return 0;		
+	}
+
+	public int setNunTel(int int1) {
+		return 0;		
+	}
+
 }
