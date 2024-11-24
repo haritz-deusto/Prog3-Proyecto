@@ -1,12 +1,18 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Contenedora {
 	private static ArrayList<Pelicula> lPeliculas = new ArrayList<>();
+	private static ArrayList<Cliente> lClientes = new ArrayList<>();
 	
 	public static ArrayList<Pelicula> getLPeliculas(){
 		return lPeliculas;
+	}
+	
+	public static List<Cliente> getListaClientes() {
+		return lClientes;
 	}
 	
 	public static Pelicula buscarPelicula(String rutaFoto) {
@@ -47,4 +53,6 @@ public class Contenedora {
 	    lPeliculas.add(p9);
 	    lPeliculas.add(p10);
 	}
+
+	
 }

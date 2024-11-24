@@ -26,6 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import db.BaseDeDatos;
 import main.Main;
 
 public class VentanaRegistro extends JFrame {
@@ -34,8 +35,8 @@ public class VentanaRegistro extends JFrame {
     private static final Logger logger = Logger.getLogger(Main.class.getName());
 
     // Componentes de la ventana
-    private JLabel labelNombre, labelApellido, labelEmail, labelNumTel, labelNumTarjeta, labelContrasenia, labelConfirmarContrasenia;
-    private JTextField txtNombre, txtApellido, txtEmail, txtNumTel, txtNumTarjeta;
+    private JLabel labelNombre, labelApellido, labelEmail, lblDni, labelNumTel, labelNumTarjeta, labelContrasenia, labelConfirmarContrasenia;
+    private JTextField txtNombre, txtApellido, txtEmail, txtNumTel, txtNumTarjeta, txtDni;
     private JPasswordField txtContrasenia, txtConfirmarContrasenia;
     private JButton btnVolver, btnConfirmar;
 
@@ -60,6 +61,7 @@ public class VentanaRegistro extends JFrame {
         labelNombre = new JLabel("Introduzca su nombre:");
         labelApellido = new JLabel("Introduzca su apellido:");
         labelEmail = new JLabel("Introduzca su email:");
+        lblDni = new JLabel("Introduzca su dni");
         labelNumTel = new JLabel("Introduzca su número de teléfono:");
         labelNumTarjeta = new JLabel("Introduzca su número de tarjeta:");
         labelContrasenia = new JLabel("Introduzca su contraseña:");
@@ -68,6 +70,7 @@ public class VentanaRegistro extends JFrame {
         txtNombre = new JTextField(20);
         txtApellido = new JTextField(20);
         txtEmail = new JTextField(20);
+        txtDni = new JTextField(9);
         txtNumTel = new JTextField(15);
         txtNumTarjeta = new JTextField(16);
         txtContrasenia = new JPasswordField(20);
@@ -76,26 +79,23 @@ public class VentanaRegistro extends JFrame {
         btnVolver = new JButton("Volver");
         btnConfirmar = new JButton("Confirmar");
         
-        btnConfirmar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String n = txtNombre.getText();
-				String a = txtApellido.getText();
-				String em = txtEmail.getText();
-				String nt = txtNumTel.getText();
-				String nta = txtNumTarjeta.getText();
-				String c = txtContrasenia.getText();
-				boolean esta = comprobarRegistro(em);
-				if(esta) {
-					JOptionPane.showMessageDialog(null, "Ese email ya está registrado. Inténtalo con otro.");
-				}else {
-					registrarUsuario(n, a, em, nt, nta, c);
-					JOptionPane.showMessageDialog(null, "Usuario registrado correctamente.");
-				}
-				limpiarCampos();
-			}
-		});
+        btnConfirmar.addActionListener((e)->{
+        	String nombre = txtNombre.getText();
+        	String apellido = txtApellido.getText();
+        	String email = txtEmail.getText();
+        	String dni = txtDni.getText();
+        	String numTel = txtNumTel.getText();
+        	String numtaString = txtNumTarjeta.getText();
+        	String contrasenia= txtContrasenia.getText();
+        	String contraseniaConfirmada = txtConfirmarContrasenia.getText();
+        	
+        	if(BaseDeDatos.obtenerClientePorEmail(email).equals(email)){
+        		JOptionPane.showMessageDialog(null, "Este email ya esta en uso");
+        	}else {
+        		BaseDeDatos.anadirCliente(email, nombre, apellido, dni, contrasenia, contraseniaConfirmada, numTel);
+        		JOptionPane.showMessageDialog(null, "Registro hecho correctamente!");
+        	}
+        });
         btnConfirmar.setEnabled(false); //desactivado hasta confirmar las 2 contrasenas
     }
     
@@ -103,12 +103,13 @@ public class VentanaRegistro extends JFrame {
     	txtNombre.setText("");
     	txtApellido.setText("");
     	txtEmail.setText("");
+    	txtDni.setText("");
     	txtNumTel.setText("");
     	txtNumTarjeta.setText("");
     	txtContrasenia.setText("");
     	txtConfirmarContrasenia.setText("");
     }
-    private void registrarUsuario(String n, String a, String e, String nt, String nta, String c) {
+    /*private void registrarUsuario(String n, String a, String e, String nt, String nta, String c) {
     	File f = new File("usuarios.txt");
     	try {
 			PrintWriter pw = new PrintWriter(new FileWriter(f, true));
@@ -118,9 +119,9 @@ public class VentanaRegistro extends JFrame {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-    }
+    }*/
     
-    private boolean comprobarRegistro(String e) {
+    /*private boolean comprobarRegistro(String e) {
     	boolean repetido = false;
     	File f = new File("usuarios.txt");
     	if(f.exists()) {
@@ -141,7 +142,7 @@ public class VentanaRegistro extends JFrame {
     		
     	}
     	return repetido;
-    }
+    }*/
 
     // Método para agregar los componentes al panel principal con GridBagLayout
     private void agregarComponentes() {
@@ -157,14 +158,16 @@ public class VentanaRegistro extends JFrame {
         agregarComponente(panelCentro, txtApellido, gbc, 1, 1);
         agregarComponente(panelCentro, labelEmail, gbc, 0, 2);
         agregarComponente(panelCentro, txtEmail, gbc, 1, 2);
-        agregarComponente(panelCentro, labelNumTel, gbc, 0, 3);
-        agregarComponente(panelCentro, txtNumTel, gbc, 1, 3);
-        agregarComponente(panelCentro, labelNumTarjeta, gbc, 0, 4);
-        agregarComponente(panelCentro, txtNumTarjeta, gbc, 1, 4);
-        agregarComponente(panelCentro, labelContrasenia, gbc, 0, 5);
-        agregarComponente(panelCentro, txtContrasenia, gbc, 1, 5);
-        agregarComponente(panelCentro, labelConfirmarContrasenia, gbc, 0, 6);
-        agregarComponente(panelCentro, txtConfirmarContrasenia, gbc, 1, 6);
+        agregarComponente(panelCentro, lblDni, gbc, 0, 3);
+        agregarComponente(panelCentro, txtDni, gbc, 1, 3);
+        agregarComponente(panelCentro, labelNumTel, gbc, 0, 4);
+        agregarComponente(panelCentro, txtNumTel, gbc, 1, 4);
+        agregarComponente(panelCentro, labelNumTarjeta, gbc, 0, 5);
+        agregarComponente(panelCentro, txtNumTarjeta, gbc, 1, 5);
+        agregarComponente(panelCentro, labelContrasenia, gbc, 0, 6);
+        agregarComponente(panelCentro, txtContrasenia, gbc, 1, 6);
+        agregarComponente(panelCentro, labelConfirmarContrasenia, gbc, 0, 7);
+        agregarComponente(panelCentro, txtConfirmarContrasenia, gbc, 1, 7);
 
         // BOTON VOLVER Y CONFIRMAR
         JPanel panelSur = new JPanel();

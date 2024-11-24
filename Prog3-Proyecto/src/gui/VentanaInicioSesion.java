@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import db.BaseDeDatos;
 import main.Main;
 
 public class VentanaInicioSesion extends JFrame {
@@ -105,7 +106,7 @@ public class VentanaInicioSesion extends JFrame {
         panel.add(componente, gbc);
     }
 
-    private boolean inicioCorrecto(String em, String c) {
+    /*private boolean inicioCorrecto(String em, String c) {
     	boolean correcto = false;
     	File f = new File("usuarios.txt");
     	if(f.exists()) {
@@ -126,20 +127,20 @@ public class VentanaInicioSesion extends JFrame {
     		
     	}
     	return correcto;
-    }
+    }*/
+    
+
     private void agregarEventos() {
         btnVolver.addActionListener((e) -> dispose()); // Cierra la ventana
         btnVolver.addActionListener((e) -> logger.log(Level.INFO, "Se ha pulsado el botón volver"));
         
         btnConfirmar.addActionListener((e)->{
-        	logger.log(Level.INFO, "Se ha pulsado el botón confirmar"); // ya se le aplicara la logica
-        	String em = txtEmail.getText();
-        	String c = txtContrasenia.getText();
-        	boolean correcto = inicioCorrecto(em, c);
-        	if(correcto) {
+        	String email = txtEmail.getText();
+        	if(BaseDeDatos.obtenerClientePorEmail(email).equals(email)) {
+        		JOptionPane.showMessageDialog(null, "Bienvenido!");
         		new VentanaPrincipal();
         	}else {
-        		JOptionPane.showMessageDialog(null, "Email y/o contraseña incorrectos", "ERROR INICIO SESIÓN", JOptionPane.ERROR_MESSAGE);
+        		JOptionPane.showMessageDialog(null, "Debe realizar el registro antes");
         	}
         	limpiarCampos();
         });
