@@ -108,7 +108,12 @@ public class VentanaArranque extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 VentanaInicioSesionAdmin ventanaInicioSesionAdmin = new VentanaInicioSesionAdmin();
                 ventanaInicioSesionAdmin.setVisible(true);
-                logger.log(Level.INFO, "Se ha pulsado el botón de Inicio de Sesión como ADMIN");
+            	
+                
+            	//VentanaAdmin ventanaAdmin = new VentanaAdmin();
+            	//ventanaAdmin.setVisible(true);
+            	logger.log(Level.INFO, "Se ha pulsado el botón de Inicio de Sesión como ADMIN");
+            	
             }
         });
 

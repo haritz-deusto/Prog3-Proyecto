@@ -96,6 +96,23 @@ public class BaseDeDatos {
 
 	   }
 
+	 public static void eliminarPelicula(String titulo) {
+		    String sql = String.format("DELETE FROM Pelicula WHERE titulo='%s'", titulo);
+
+		    try {
+		        Connection con = initBD("baseDeDatos.db");
+		        Statement st = con.createStatement();
+		        st.executeUpdate(sql);
+		        st.close();
+		        closeBD(con);
+		        System.out.println("Película eliminada con éxito: " + titulo);
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        System.err.println("Error al eliminar la película: " + titulo);
+		    }
+		}
+
+	 
 	   public static void borrarTodosLosClientes() {
 	      String sql = "delete from Cliente";
 
