@@ -3,6 +3,7 @@ package main;
 import gui.VentanaArranque;
 import java.util.logging.Logger;
 
+import db.BaseDeDatos;
 import domain.Contenedora;
 
 import java.util.logging.Level;
@@ -19,6 +20,7 @@ public class Main {
 		// Ejemplos de logger
 		// logger.info("Se ha mostrado un mensaje en consola");
 		// logger.warning("Mensaje de warning"); logger.severe("Mensaje de error");
+		BaseDeDatos.initBD("baseDeDatos.db");
 		
 		Contenedora.cargarPeliculas();
 		
