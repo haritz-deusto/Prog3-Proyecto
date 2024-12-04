@@ -32,12 +32,17 @@ public class BaseDeDatos {
 		      try {
 		         Class.forName("org.sqlite.JDBC");
 		         con = DriverManager.getConnection("jdbc:sqlite:ficheros/" + nomBD);
-		      } catch (ClassNotFoundException var3) {
+		      /*} catch (ClassNotFoundException var3) {
 		         var3.printStackTrace();
 		      } catch (SQLException var4) {
 		         var4.printStackTrace();
 		      }
 
+		      return con;*/
+		         
+		      } catch (ClassNotFoundException | SQLException e){
+		    	  e.printStackTrace();
+		      }
 		      return con;
 		   }
 	   
@@ -45,8 +50,8 @@ public class BaseDeDatos {
 		      if (con != null) {
 		         try {
 		            con.close();
-		         } catch (SQLException var2) {
-		            var2.printStackTrace();
+		         } catch (SQLException e) {
+		            e.printStackTrace();
 		         }
 		      }
 
@@ -56,15 +61,18 @@ public class BaseDeDatos {
 	 * @param con
 	 */
 	public static void crearTablas(Connection con) {
-		      String sql = "CREATE TABLE IF NOT EXISTS Cliente (email String, nombre String, apellido String,  dni String, contrasenia String, nunTel String, numtarjeta String)";
-		      String sql2 = "CREATE TABLE IF NOT EXISTS Pelicula (titulo String, genero Genero, estrellas Valoracion, duracion String, descripcion String rutafoto String)";
-		      String sql3 = "CREATE TABLE IF NOT EXISTS Admin (email String, nombre String, apellido String,  dni String, contrasenia String, nunTel String, numtarjeta String)";
+		      String sqlCliente = "CREATE TABLE IF NOT EXISTS Cliente (email String, nombre String, apellido String,  dni String, contrasenia String, nunTel String, numtarjeta String)";
+		      String sqlPelicula = "CREATE TABLE IF NOT EXISTS Pelicula (titulo String, genero Genero, estrellas Valoracion, duracion String, descripcion String, rutafoto String)";
+		      String sqlAdmin = "CREATE TABLE IF NOT EXISTS Admin (email String, nombre String, apellido String,  dni String, contrasenia String, nunTel String, numtarjeta String)";
 
 		      try {
 		         Statement st = con.createStatement();
-		         st.executeUpdate(sql);
-		         st.executeUpdate(sql2);
-		         st.executeUpdate(sql3);
+		         st.executeUpdate(sqlCliente);
+		         System.out.println("Tabla 'Cliente' creada o ya existente.");
+		         st.executeUpdate(sqlPelicula);
+		         System.out.println("Tabla 'Pelicula' creada o ya existente.");
+		         st.executeUpdate(sqlAdmin);
+		         System.out.println("Tabla 'Admin' creada o ya existente.");
 					/*
 					 * Iterator var6 = Contenedora.getLPeliculas().iterator();
 					 * 
