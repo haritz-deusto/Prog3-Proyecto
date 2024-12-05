@@ -42,7 +42,7 @@ public class VentanaPrincipal extends JFrame {
     private static Logger logger = Logger.getLogger(Main.class.getName());
     
     private JMenuBar barraMenu;
-    private JMenuItem itemCuenta, itemGenero1, itemGenero2, itemGenero3, itemGenero4, itemGenero5, itemGenero6, itemGenero7, itemBuscar;
+    private JMenuItem itemCuenta, itemGenero1, itemGenero2, itemGenero3, itemGenero4, itemGenero5, itemGenero6, itemGenero7, itemBuscar, itemSorprendeme;
     private JMenu visualizarCuenta, visualizarPeliculas;
     private JPanel panelCentro, panelSur, panelNorte, panelEste, panelOeste; 
     private JLabel labelTitulo;
@@ -76,9 +76,12 @@ public class VentanaPrincipal extends JFrame {
         
         itemBuscar = new JMenu("Buscar");
         
+        itemSorprendeme = new JMenuItem("Sorpréndeme");
+        
         barraMenu.add(visualizarCuenta);
         barraMenu.add(visualizarPeliculas);
         barraMenu.add(itemBuscar);
+        barraMenu.add(itemSorprendeme);
 
         panelCentro = new JPanel(new BorderLayout());
         panelNorte = new JPanel(new BorderLayout());
@@ -111,12 +114,13 @@ public class VentanaPrincipal extends JFrame {
         itemGenero5.addActionListener(e -> filtrarPorGenero("ANIMACION"));
         itemGenero6.addActionListener(e -> filtrarPorGenero("FANTASIA"));
         itemGenero7.addActionListener(e -> filtrarPorGenero("ROMANCE"));
-        
+       
         itemCuenta.addActionListener(e -> {
             VentanaConfigurarCuenta ventanaCuenta = new VentanaConfigurarCuenta();
             ventanaCuenta.setVisible(true);
             logger.log(Level.INFO, "Se ha pulsado el botón volver");
         });
+        
         itemBuscar.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -131,6 +135,16 @@ public class VentanaPrincipal extends JFrame {
 	        
 			}
 		});
+        
+        itemSorprendeme.addActionListener(e -> {
+            List<Pelicula> peliculas = Contenedora.getLPeliculas();
+            if (!peliculas.isEmpty()) {
+                new VentanaSorprendeme(peliculas);
+            } else {
+                JOptionPane.showMessageDialog(this, "No hay películas disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
         
         ImageIcon imagen = new ImageIcon(getClass().getResource("/imagenes/deustoStreamLogo1.png"));
         setIconImage(imagen.getImage());
