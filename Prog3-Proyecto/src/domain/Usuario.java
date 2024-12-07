@@ -7,12 +7,14 @@ public abstract class Usuario {
 	private String dni;
 	private String email;
 	private String contrasenia;
-	private int numTel;
+	private String numTel;
+	private String numTarjeta;
+	private String tipoUsuario;
 	
 	public Usuario() {
 		super();
 	}
-	public Usuario(String nombre, String apellido, String dni, String email, String contrasenia, int numTel, int numTarjeta) {
+	public Usuario(String nombre, String apellido, String dni, String email, String contrasenia, String numTel, String numTarjeta, String tipoUsuario) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -20,6 +22,8 @@ public abstract class Usuario {
 		this.email = email;
 		this.contrasenia = contrasenia;
 		this.numTel = numTel;
+		this.numTarjeta = numTarjeta;
+		this.tipoUsuario = tipoUsuario;
 	}
 	public String getNombre() {
 		return nombre;
@@ -52,18 +56,32 @@ public abstract class Usuario {
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
-	public int getNumTel() {
+	public String getNumTel() {
 		return numTel;
 	}
-	public void setNumTel(int numTel) {
+	public String getNumTarjeta() {
+		return numTarjeta;
+	}
+	public void setNumTarjeta(String numTarjeta) {
+		this.numTarjeta = numTarjeta;
+	}
+	public String getTipoUsuario() {
+		return tipoUsuario;
+	}
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+	public void setNumTel(String numTel) {
 		this.numTel = numTel;
 	}
-	
 	@Override
 	public String toString() {
 		return "Usuario [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", email=" + email
-				+ ", contrasenia=" + contrasenia + ", numTel=" + numTel + ", numTarjeta="+ "]";
+				+ ", contrasenia=" + contrasenia + ", numTel=" + numTel + ", numTarjeta=" + numTarjeta
+				+ ", tipoUsuario=" + tipoUsuario + "]";
 	}
+	
+	
 	
 	
 

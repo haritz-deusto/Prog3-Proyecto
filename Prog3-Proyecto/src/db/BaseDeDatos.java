@@ -26,7 +26,7 @@ public class BaseDeDatos {
 	public BaseDeDatos() {
 	   }
 	
-	   public static Connection initBD(String nomBD) {
+	   public static Connection initBD(String nomBD) throws SQLException{
 		      Connection con = null;
 
 		      try {
@@ -60,19 +60,65 @@ public class BaseDeDatos {
 	   /**
 	 * @param con
 	 */
-	public static void crearTablas(Connection con) {
-		      String sqlCliente = "CREATE TABLE IF NOT EXISTS Cliente (email String, nombre String, apellido String,  dni String, contrasenia String, nunTel String, numtarjeta String)";
-		      String sqlPelicula = "CREATE TABLE IF NOT EXISTS Pelicula (titulo String, genero Genero, estrellas Valoracion, duracion String, descripcion String, rutafoto String)";
-		      String sqlAdmin = "CREATE TABLE IF NOT EXISTS Admin (email String, nombre String, apellido String,  dni String, contrasenia String, nunTel String, numtarjeta String)";
-
+	public static void crearTablas(Connection con) {	      
+		      String tablaUsuario = """
+		                CREATE TABLE IF NOT EXISTS Usuarios (
+		                    dni TEXT PRIMARY KEY,
+		                    nombre TEXT NOT NULL,
+		                    apellido TEXT NOT NULL,
+		                    email TEXT UNIQUE NOT NULL,
+		                    num_telefono TEXT,
+		                    num_tarjeta TEXT,
+		                    contrasenia TEXT NOT NULL,
+		                    tipo_usuario TEXT CHECK(tipo_usuario IN ('ADMIN', 'CLIENTE')) NOT NULL
+		                );
+		            """;
+		      
+		      String tablaGeneros = """
+		              CREATE TABLE IF NOT EXISTS Generos (
+		                  idGenero INTEGER PRIMARY KEY AUTOINCREMENT,
+		                  genero TEXT UNIQUE NOT NULL
+		              );
+		          """;
+		      
+		      String tablaPeliculas = """
+		                CREATE TABLE IF NOT EXISTS Peliculas (
+		                    idPelicula INTEGER PRIMARY KEY AUTOINCREMENT,
+		                    titulo TEXT NOT NULL,
+		                    genero TEXT,
+		                    valoracion TEXT CHECK (valoracion IN ('UNA_ESTRELLA', 'DOS_ESTRELLAS', 'TRES_ESTRELLAS', 'CUATRO_ESTRELLAS', 'CINCO_ESTRELLAS')),
+		                    duracion INTEGER,
+		                    descripcion TEXT,
+		                    foto TEXT,
+		                    FOREIGN KEY (genero) REFERENCES Generos(genero)
+		                );
+		            """;
+		      
+		      String tablaComentarios = """
+		                CREATE TABLE IF NOT EXISTS Comentarios (
+		                    idComentario INTEGER PRIMARY KEY AUTOINCREMENT,
+		                    dni INTEGER NOT NULL,
+		                    idPelicula INTEGER NOT NULL,
+		                    titulo TEXT NOT NULL,
+		                    comentario TEXT,
+		                    fecha DATE DEFAULT CURRENT_DATE,
+		                    FOREIGN KEY (dni) REFERENCES Usuarios(dni),
+		                    FOREIGN KEY (idPelicula) REFERENCES Peliculas(idPelicula),
+		                    FOREIGN KEY (titulo) REFERENCES Peliculas(titulo)
+		                );
+		            """;
+		      
+		      
 		      try {
 		         Statement st = con.createStatement();
-		         st.executeUpdate(sqlCliente);
-		         System.out.println("Tabla 'Cliente' creada o ya existente.");
-		         st.executeUpdate(sqlPelicula);
-		         System.out.println("Tabla 'Pelicula' creada o ya existente.");
-		         st.executeUpdate(sqlAdmin);
-		         System.out.println("Tabla 'Admin' creada o ya existente.");
+		         st.executeUpdate(tablaUsuario);
+		         System.out.println("Tabla 'Usuario' creada o ya existente.");
+		         st.executeUpdate(tablaPeliculas);
+		         System.out.println("Tabla 'Peliculas' creada o ya existente.");
+		         st.executeUpdate(tablaComentarios);
+		         System.out.println("Tabla 'Comentarios' creada o ya existente.");
+		         st.executeUpdate(tablaGeneros);
+		         System.out.println("Tabla 'Generos' creada o ya existente.");
 					/*
 					 * Iterator var6 = Contenedora.getLPeliculas().iterator();
 					 * 
@@ -83,8 +129,8 @@ public class BaseDeDatos {
 					 */
 
 		         st.close();
-		      } catch (SQLException var8) {
-		         var8.printStackTrace();
+		      } catch (SQLException e) {
+		         e.printStackTrace();
 		      }
 
 		   }
@@ -192,8 +238,8 @@ public class BaseDeDatos {
 		            cliente.setApellido(apellido);
 		            cliente.setDni(dni);
 		            cliente.setContrasenia(contrasenia);
-		            cliente.setNumTel(Integer.parseInt(nunTel));
-		            cliente.setNumTarjeta(Integer.parseInt(numTarjeta));
+		            cliente.setNumTel(nunTel);
+		            cliente.setNumTarjeta(numTarjeta);
 
 		            listaClientesBD.add(cliente);
 		        }
@@ -302,8 +348,8 @@ public class BaseDeDatos {
 		        nuevoCliente.setApellido(apellido);
 		        nuevoCliente.setDni(dni);
 		        nuevoCliente.setContrasenia(contrasenia);
-		        nuevoCliente.setNumTel(Integer.parseInt(nunTel));
-		        nuevoCliente.setNumTarjeta(Integer.parseInt(numTarjeta));
+		        nuevoCliente.setNumTel(nunTel);
+		        nuevoCliente.setNumTarjeta(numTarjeta);
 
 //		        Contenedora.getListaClientes().add(nuevoCliente); Modificar clase contenedora que se carga con el metodo de obtenerlistaClientes
 		        st.close();
@@ -331,8 +377,8 @@ public class BaseDeDatos {
 		                cliente.setApellido(apellido);
 		                cliente.setDni(dni);
 		                cliente.setContrasenia(contrasenia);
-		                cliente.setNumTel(Integer.parseInt(nunTel));
-		                cliente.setNumTarjeta(Integer.parseInt(numTarjeta));
+		                cliente.setNumTel(nunTel);
+		                cliente.setNumTarjeta(numTarjeta);
 		                break;
 		            }
 		        }
@@ -454,8 +500,8 @@ public class BaseDeDatos {
 		            cliente.setApellido(apellido);
 		            cliente.setDni(dni);
 		            cliente.setContrasenia(contrasenia);
-		            cliente.setNumTel(Integer.parseInt(nunTel));
-		            cliente.setNumTarjeta(Integer.parseInt(numTarjeta));
+		            cliente.setNumTel(nunTel);
+		            cliente.setNumTarjeta(numTarjeta);
 
 		            Contenedora.getListaClientes().add(cliente);
 		        }

@@ -2,45 +2,53 @@ package domain;
 
 import java.time.LocalDate;
 
-public class Comentario extends Pelicula{
-	protected Usuario usuario;
-	protected String texto;
-	protected LocalDate fecha;
+public class Comentario {
+    private int idComentario;
+    private String comentario;
+    private LocalDate fecha;
+    
 
-	public Comentario(String titulo, int duracion, String descripcion, Genero genero, Valoracion estrellas,
-			String rutaFoto, Usuario usuario, String texto, LocalDate fecha) {
-		super(titulo, duracion, descripcion, genero, estrellas, rutaFoto);
-		this.usuario = usuario;
-		this.texto = texto;
-		this.fecha = fecha;
+    public Comentario(int idComentario, String comentario, LocalDate fecha) {
+        this.idComentario = idComentario;
+        this.comentario = comentario;
+        this.fecha = fecha;
+    }
+
+
+	public int getIdComentario() {
+		return idComentario;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+
+	public void setIdComentario(int idComentario) {
+		this.idComentario = idComentario;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+
+	public String getComentario() {
+		return comentario;
 	}
 
-	public String getTexto() {
-		return texto;
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
-	public void setTexto(String texto) {
-		this.texto = texto;
-	}
 
 	public LocalDate getFecha() {
 		return fecha;
 	}
 
+
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Comentario [usuario=" + usuario + ", texto=" + texto + ", fecha=" + fecha + "]";
+		return "Comentario [idComentario=" + idComentario + ", comentario=" + comentario + ", fecha=" + fecha + "]";
 	}
+    
+ 
 }

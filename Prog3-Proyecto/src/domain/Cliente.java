@@ -1,25 +1,25 @@
 package domain;
 
 public class Cliente extends Usuario {
-	private int numTarjeta;
+	private String numTarjeta;
 
 	public Cliente() {
 		super();
-		setNumTarjeta(0);
+		setNumTarjeta(numTarjeta);
 	}
 
-	public Cliente(String nombre, String apellido, String dni, String email, String contrasenia, int numTel,
-			int numTarjeta) {
-		super(nombre, apellido, dni, email, contrasenia, numTel, numTarjeta);
+	public Cliente(String nombre, String apellido, String dni, String email, String contrasenia, String numTel,
+			String numTarjeta) {
+		super();
 		this.setNumTarjeta(numTarjeta);
 
 	}
 
-	public int getNumTarjeta() {
+	public String getNumTarjeta() {
 		return numTarjeta;
 	}
 
-	public void setNumTarjeta(int numTarjeta) {
+	public void setNumTarjeta(String numTarjeta) {
 		this.numTarjeta = numTarjeta;
 	}
 
