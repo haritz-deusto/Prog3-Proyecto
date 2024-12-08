@@ -20,6 +20,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import db.BaseDeDatos;
+import domain.Admin;
+import domain.Cliente;
+import domain.Usuario;
 import main.Main;
 
 public class VentanaInicioSesion extends JFrame {
@@ -136,13 +139,22 @@ public class VentanaInicioSesion extends JFrame {
         
         btnConfirmar.addActionListener((e)->{
         	String email = txtEmail.getText();
-        	if(BaseDeDatos.obtenerClientePorEmail(email).equals(email)) {
-        		JOptionPane.showMessageDialog(null, "Bienvenido!");
-        		new VentanaPrincipal();
-        	}else {
-        		JOptionPane.showMessageDialog(null, "Debe realizar el registro antes");
-        	}
-        	limpiarCampos();
+        	String contrasenia = new String(txtContrasenia.getPassword());
+        	
+        	// Usar el método para obtener el usuario de la base de datos
+            Usuario usuario = BaseDeDatos.obtenerUsuarioPorEmailYContrasenia(email, contrasenia);
+
+            if (usuario != null && usuario instanceof Cliente) {
+                JOptionPane.showMessageDialog(this, "Bienvenido!");
+                new VentanaPrincipal(); // Inicia la ventana principal
+                dispose(); // Cierra la ventana de inicio de sesión
+            } else if (usuario instanceof Admin) {
+                JOptionPane.showMessageDialog(this, "Acceso denegado. Usa la ventana de admin para iniciar sesión.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Credenciales incorrectas. Inténtelo de nuevo.");
+            }
+
+            limpiarCampos();
         });
     }
     private void limpiarCampos() {

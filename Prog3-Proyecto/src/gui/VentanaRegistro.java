@@ -85,15 +85,15 @@ public class VentanaRegistro extends JFrame {
         	String email = txtEmail.getText();
         	String dni = txtDni.getText();
         	String numTel = txtNumTel.getText();
-        	String numtaString = txtNumTarjeta.getText();
-        	String contrasenia= txtContrasenia.getText();
-        	String contraseniaConfirmada = txtConfirmarContrasenia.getText();
+        	String numTarjeta = txtNumTarjeta.getText();
+            String contrasenia = new String(txtContrasenia.getPassword());
         	
-        	if(BaseDeDatos.obtenerClientePorEmail(email).equals(email)){
-        		JOptionPane.showMessageDialog(null, "Este email ya esta en uso");
+        	if(BaseDeDatos.existeEmail(email)){
+        		JOptionPane.showMessageDialog(this, "Este email ya esta en uso", "Error", JOptionPane.ERROR_MESSAGE);
         	}else {
-        		BaseDeDatos.anadirCliente(email, nombre, apellido, dni, contrasenia, contraseniaConfirmada, numTel);
-        		JOptionPane.showMessageDialog(null, "Registro hecho correctamente!");
+        		BaseDeDatos.anadirCliente(dni, nombre, apellido, email, contrasenia, numTel, numTarjeta);
+        		JOptionPane.showMessageDialog(this, "Registro realizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        		limpiarCampos();
         	}
         });
         btnConfirmar.setEnabled(false); //desactivado hasta confirmar las 2 contrasenas
