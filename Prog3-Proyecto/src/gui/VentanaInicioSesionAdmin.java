@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import db.BaseDeDatos;
 import main.Main;
 
 public class VentanaInicioSesionAdmin extends JFrame{
@@ -105,44 +106,25 @@ public class VentanaInicioSesionAdmin extends JFrame{
         panel.add(componente, gbc);
     }
 
-    private boolean inicioCorrecto(String em, String c) {
-    	boolean correcto = false;
-    	File f = new File("admin.txt");
-    	if(f.exists()) {
-    		try {
-				Scanner sc = new Scanner(f);
-				while(sc.hasNextLine()) {
-					String linea = sc.nextLine();
-					// linea = "n;a;e;nt;nta;co"
-					String [] partes = linea.split(";");
-					if(partes[2].equals(em) && partes[5].equals(c)) {
-						correcto = true;
-					}
-				}
-				sc.close();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
-    		
-    	}
-    	return correcto;
+    private boolean inicioCorrecto(String email, String contrasenia) {
+        return BaseDeDatos.validarAdmin(email, contrasenia);
     }
     private void agregarEventos() {
-        btnVolver.addActionListener((e) -> dispose()); // Cierra la ventana
+        btnVolver.addActionListener((e) -> dispose()); 
         btnVolver.addActionListener((e) -> logger.log(Level.INFO, "Se ha pulsado el botón volver"));
         
         btnConfirmar.addActionListener((e)->{
-        	logger.log(Level.INFO, "Se ha pulsado el botón confirmar"); // ya se le aplicara la logica
-        	String em = txtEmail.getText();
-        	String c = txtContrasenia.getText();
-        	boolean correcto = inicioCorrecto(em, c);
-        	if(correcto) {
-        		VentanaAdmin ventanaAdmin = new VentanaAdmin();
-        		ventanaAdmin.setVisible(true);
-        		dispose();
-        	}else {
-        		JOptionPane.showMessageDialog(null, "Email y/o contraseña incorrectos", "ERROR INICIO SESIÓN", JOptionPane.ERROR_MESSAGE);
-        	}
+        	logger.log(Level.INFO, "Se ha pulsado el botón confirmar"); 
+        	String email = txtEmail.getText();
+            String contrasenia = new String(txtContrasenia.getPassword());
+            if (inicioCorrecto(email, contrasenia)) {
+                JOptionPane.showMessageDialog(this, "Bienvenido, Administrador!");
+                VentanaAdmin ventanaAdmin = new VentanaAdmin();
+                ventanaAdmin.setVisible(true);
+                dispose(); 
+            } else {
+                JOptionPane.showMessageDialog(this, "Email o contraseña incorrectos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         	limpiarCampos();
         });
     }

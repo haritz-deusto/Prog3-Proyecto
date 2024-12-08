@@ -203,7 +203,48 @@ public class BaseDeDatos {
 		    return usuario;
 		}
 
-	   
+	   public static boolean validarAdmin(String email, String contrasenia) {
+		    boolean esValido = false;
+		    String sql = "SELECT * FROM Usuarios WHERE email = ? AND contrasenia = ? AND tipo_usuario = 'ADMIN'";
+
+		    try (Connection con = initBD("baseDeDatos.db");
+		         PreparedStatement pst = con.prepareStatement(sql)) {
+
+		        pst.setString(1, email);
+		        pst.setString(2, contrasenia);
+
+		        try (ResultSet rs = pst.executeQuery()) {
+		            esValido = rs.next(); // Si hay un resultado, el admin existe
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    return esValido;
+		}
+
+	   public static void anadirAdmin(String dni, String nombre, String apellido, String email, String contrasenia, String numTel, String numTarjeta) {
+		    String sql = "INSERT INTO Usuarios (dni, nombre, apellido, email, num_telefono, num_tarjeta, contrasenia, tipo_usuario) " +
+		                 "VALUES (?, ?, ?, ?, ?, ?, ?, 'ADMIN')"; 
+
+		    try (Connection con = initBD("baseDeDatos.db");
+		         PreparedStatement pst = con.prepareStatement(sql)) {
+
+		        pst.setString(1, dni);
+		        pst.setString(2, nombre);
+		        pst.setString(3, apellido);
+		        pst.setString(4, email);
+		        pst.setString(5, numTel);
+		        pst.setString(6, numTarjeta);
+		        pst.setString(7, contrasenia);
+
+		        pst.executeUpdate();
+		        System.out.println("Administrador añadido correctamente.");
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		}
+
 	
 
 }
