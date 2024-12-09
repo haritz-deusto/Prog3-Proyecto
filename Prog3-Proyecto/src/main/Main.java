@@ -26,7 +26,6 @@ public class Main {
 		try {
 			con = BaseDeDatos.initBD("baseDeDatos.db");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		BaseDeDatos.initBD("baseDeDatos.db");

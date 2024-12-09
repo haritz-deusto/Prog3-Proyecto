@@ -8,9 +8,9 @@ public class Cliente extends Usuario {
 		setNumTarjeta(numTarjeta);
 	}
 
-	public Cliente(String nombre, String apellido, String dni, String email, String contrasenia, String numTel,
-			String numTarjeta) {
+	public Cliente(String nombre, String apellido, String dni, String email, String contrasenia, String numTel, String numTarjeta, String tipoUsuario) {
 		super();
+		tipoUsuario  = "CLIENTE";
 		this.setNumTarjeta(numTarjeta);
 
 	}
