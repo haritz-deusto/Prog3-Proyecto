@@ -191,7 +191,7 @@ public class BaseDeDatos {
 		            if ("CLIENTE".equals(tipoUsuario)) {
 		                usuario = new Cliente(nombre, apellido, dni, email, contrasenia, numTel, numTarjeta);
 		            } else if ("ADMIN".equals(tipoUsuario)) {
-		                usuario = new Admin(nombre, apellido, dni, email, contrasenia, Integer.parseInt(numTel), Integer.parseInt(numTarjeta));
+		                usuario = new Admin(nombre, apellido, dni, email, contrasenia, numTel, numTarjeta);
 		            }
 		            
 		             }
@@ -245,6 +245,140 @@ public class BaseDeDatos {
 		    }
 		}
 
-	
+	   public static List<Cliente> obtenerListaClientes() {
+		    List<Cliente> clientes = new ArrayList<>();
+		    String sql = "SELECT * FROM Usuarios WHERE tipo_usuario = 'CLIENTE'";
+
+		    try (Connection con = initBD("baseDeDatos.db");
+		         Statement st = con.createStatement();
+		         ResultSet rs = st.executeQuery(sql)) {
+
+		        while (rs.next()) {
+		            String email = rs.getString("email");
+		            String nombre = rs.getString("nombre");
+		            String apellido = rs.getString("apellido");
+		            String dni = rs.getString("dni");
+		            String telefono = rs.getString("num_telefono");
+		            String tarjeta = rs.getString("num_tarjeta");
+		            String contrasenia = rs.getString("contrasenia");
+
+		            clientes.add(new Cliente(email, nombre, apellido, dni, telefono, tarjeta, contrasenia));
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    return clientes;
+		}
+
+	   
+	   public static List<Admin> obtenerListaAdmins() {
+		    List<Admin> admins = new ArrayList<>();
+		    String sql = "SELECT * FROM Usuarios WHERE tipo_usuario = 'ADMIN'";
+
+		    try (Connection con = initBD("baseDeDatos.db");
+		         Statement st = con.createStatement();
+		         ResultSet rs = st.executeQuery(sql)) {
+
+		        while (rs.next()) {
+		            String email = rs.getString("email");
+		            String nombre = rs.getString("nombre");
+		            String apellido = rs.getString("apellido");
+		            String dni = rs.getString("dni");
+		            String telefono = rs.getString("num_telefono");
+		            String tarjeta = rs.getString("num_tarjeta");
+		            String contrasenia = rs.getString("contrasenia");
+
+		            admins.add(new Admin(email, nombre, apellido, dni, telefono, tarjeta, contrasenia));
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    return admins;
+		}
+
+
+	   public static List<Pelicula> obtenerListaPeliculas() {
+		    List<Pelicula> peliculas = new ArrayList<>();
+		    String sql = "SELECT * FROM Peliculas";
+
+		    try (Connection con = initBD("baseDeDatos.db");
+		         Statement st = con.createStatement();
+		         ResultSet rs = st.executeQuery(sql)) {
+
+		        while (rs.next()) {
+		            peliculas.add(new Pelicula(
+		                rs.getInt("idPelicula"),
+		                rs.getString("titulo"),
+		                rs.getInt("duracion"),
+		                rs.getString("descripcion"),
+		                Genero.valueOf(rs.getString("genero")),
+		                Valoracion.valueOf(rs.getString("valoracion")),
+		                rs.getString("foto")
+		            ));
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    return peliculas;
+		}
+
+	   public static boolean eliminarCliente(String email) {
+		    String sql = "DELETE FROM Usuarios WHERE email = ? AND tipo_usuario = 'CLIENTE'";
+
+		    try (Connection con = initBD("baseDeDatos.db");
+		         PreparedStatement pst = con.prepareStatement(sql)) {
+
+		        pst.setString(1, email);
+		        int filasAfectadas = pst.executeUpdate();
+
+		        // Verificar si se eliminó el cliente
+		        if (filasAfectadas > 0) {
+		            System.out.println("Cliente con email " + email + " eliminado correctamente.");
+		            return true;
+		        } else {
+		            System.out.println("No se encontró el cliente con email " + email + " para eliminar.");
+		            return false;
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        return false;
+		    }
+		}
+
+
+	   public static void anadirPelicula(String titulo, Genero genero, Valoracion estrellas, String duracion, String descripcion, String foto) {
+		    String sql = "INSERT INTO Peliculas (titulo, genero, valoracion, duracion, descripcion, foto) VALUES (?, ?, ?, ?, ?, ?)";
+
+		    try (Connection con = initBD("baseDeDatos.db");
+		         PreparedStatement pst = con.prepareStatement(sql)) {
+
+		        pst.setString(1, titulo);
+		        pst.setString(2, genero.name());
+		        pst.setString(3, estrellas.name());
+		        pst.setInt(4, Integer.parseInt(duracion));
+		        pst.setString(5, descripcion);
+		        pst.setString(6, foto);
+		        pst.executeUpdate();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		}
+	   
+	   public static void eliminarPelicula(String titulo) {
+		    String sql = "DELETE FROM Peliculas WHERE titulo = ?";
+
+		    try (Connection con = initBD("baseDeDatos.db");
+		         PreparedStatement pst = con.prepareStatement(sql)) {
+
+		        pst.setString(1, titulo);
+		        pst.executeUpdate();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		}
+
 
 }

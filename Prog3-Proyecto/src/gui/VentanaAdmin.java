@@ -47,7 +47,7 @@ public class VentanaAdmin extends JFrame {
 
     private JPanel createClientesPanel() {
         JPanel panel = new JPanel(new BorderLayout());
-        String[] columnas = {"Email", "Nombre", "Apellido", "DNI", "Teléfono", "Tarjeta"};
+        String[] columnas = {"Dni", "Nombre", "Apellido", "Email", "Teléfono", "Tarjeta", "Contraseña"};
         DefaultTableModel tableModel = new DefaultTableModel(columnas, 0);
         JTable table = new JTable(tableModel);
 
@@ -55,51 +55,62 @@ public class VentanaAdmin extends JFrame {
         List<Cliente> clientes = BaseDeDatos.obtenerListaClientes();
         for (Cliente cliente : clientes) {
             tableModel.addRow(new Object[]{
-                cliente.getEmail(),
+                cliente.getDni(),
                 cliente.getNombre(),
                 cliente.getApellido(),
-                cliente.getDni(),
+                cliente.getEmail(),
                 cliente.getNumTel(),
-                cliente.getNumTarjeta()
+                cliente.getNumTarjeta(),
+                cliente.getContrasenia()
             });
         }
 
         // Botón Añadir Cliente
         JButton btnAdd = new JButton("Añadir Cliente");
         btnAdd.addActionListener(e -> {
-            String email = JOptionPane.showInputDialog("Email:");
+        	String dni = JOptionPane.showInputDialog("DNI:");        
             String nombre = JOptionPane.showInputDialog("Nombre:");
             String apellido = JOptionPane.showInputDialog("Apellido:");
-            String dni = JOptionPane.showInputDialog("DNI:");
+            String email = JOptionPane.showInputDialog("Email:");
             String telefono = JOptionPane.showInputDialog("Teléfono:");
             String tarjeta = JOptionPane.showInputDialog("Tarjeta:");
+            String contrasenia = JOptionPane.showInputDialog("Contraseña:");
 
-            if (email != null && nombre != null && apellido != null && dni != null && telefono != null && tarjeta != null) {
+            if (dni != null && nombre != null && apellido != null && email != null && telefono != null && tarjeta != null && contrasenia != null) {
                 int confirmacion = JOptionPane.showConfirmDialog(
                         this, "¿Confirmar añadir cliente?", "Confirmación", JOptionPane.YES_NO_OPTION);
                 if (confirmacion == JOptionPane.YES_OPTION) {
-                    BaseDeDatos.anadirCliente(email, nombre, apellido, dni, "1234", telefono, tarjeta);
-                    tableModel.addRow(new Object[]{email, nombre, apellido, dni, telefono, tarjeta});
+                    BaseDeDatos.anadirCliente(dni, nombre, apellido, email, telefono, tarjeta, contrasenia);
+                    tableModel.addRow(new Object[]{dni, nombre, apellido, email, telefono, tarjeta, contrasenia});
                 }
             }
         });
 
-        // Botón Eliminar Cliente
+        
+     // Botón Eliminar Cliente
         JButton btnDelete = new JButton("Eliminar Cliente");
         btnDelete.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow != -1) {
-                String email = (String) tableModel.getValueAt(selectedRow, 0);
+                String email = (String) tableModel.getValueAt(selectedRow, 4); 
                 int confirmacion = JOptionPane.showConfirmDialog(
                         this, "¿Confirmar eliminar cliente?", "Confirmación", JOptionPane.YES_NO_OPTION);
                 if (confirmacion == JOptionPane.YES_OPTION) {
-                    BaseDeDatos.eliminarCliente(email);
-                    tableModel.removeRow(selectedRow);
+                    // Eliminar cliente de la base de datos
+                    boolean eliminado = BaseDeDatos.eliminarCliente(email);
+                    if (eliminado) {
+                        // Eliminar la fila de la tabla
+                        tableModel.removeRow(selectedRow);
+                        JOptionPane.showMessageDialog(this, "Cliente eliminado correctamente.");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Error al eliminar el cliente.");
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Selecciona un cliente para eliminar.");
             }
         });
+
 
         // Panel de botones
         JPanel buttonPanel = new JPanel();
@@ -123,11 +134,13 @@ public class VentanaAdmin extends JFrame {
         List<Admin> admins = BaseDeDatos.obtenerListaAdmins();
         for (Admin admin : admins) {
             tableModel.addRow(new Object[]{
-                admin.getEmail(),
-                admin.getNombre(),
-                admin.getApellido(),
-                admin.getDni(),
-                admin.getNumTel(),
+            		admin.getDni(),
+                    admin.getNombre(),
+                    admin.getApellido(),
+                    admin.getEmail(),
+                    admin.getNumTel(),
+                    admin.getNumTarjeta(),
+                    admin.getContrasenia()
             });
         }
 

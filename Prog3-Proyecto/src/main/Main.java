@@ -32,10 +32,6 @@ public class Main {
 		BaseDeDatos.initBD("baseDeDatos.db");
 		BaseDeDatos.crearTablas(con);
 		
-		BaseDeDatos.anadirAdmin("09876543B", "Enrique", "Corres", "enrique.corres@opendeusto.es", "enrique123", "690875123", "098765432109");
-	    BaseDeDatos.anadirAdmin("86750099W", "Iker", "Díez", "iker.diez.perez@opendeusto.es", "iker123", "654000999", "123412341234");
-	    BaseDeDatos.anadirAdmin("36540119Y", "Haritz", "Carvalho", "haritz.carvalho@opendeusto.es", "haritz123", "600123556", "090987651234");
-	    BaseDeDatos.anadirAdmin("2", "2", "2", "2", "2", "2", "2");
 		
 		Contenedora.cargarPeliculas();
 		

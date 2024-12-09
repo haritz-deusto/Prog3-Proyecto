@@ -6,8 +6,8 @@ public class Admin extends Usuario {
 		super();
 	}
 
-	public Admin(String nombre, String apellido, String dni, String email, String contrasenia, int numTel,
-			int numTarjeta) {
+	public Admin(String nombre, String apellido, String dni, String email, String contrasenia, String numTel,
+			String numTarjeta) {
 		super();
 	}
 
