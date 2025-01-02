@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 public class Contenedora {
 	private static ArrayList<Pelicula> lPeliculas = new ArrayList<>();
@@ -35,6 +36,12 @@ public class Contenedora {
 		return p;
 	}
 	
+	public static List<Pelicula> buscarPeliculasPorGenero(Genero genero, Pelicula peliActual) {
+	    
+	    return lPeliculas.stream()
+	                     .filter(p -> p.getGenero() == genero && p != peliActual)
+	                     .collect(Collectors.toList());
+	}
 	
 	public static void cargarPeliculas() {
 	    File file = new File("ficheros/pelis.txt");  

@@ -9,6 +9,7 @@ import domain.Valoracion;
 import main.Main;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,13 +18,17 @@ import java.util.stream.Collectors;
 public class VentanaPelicula extends JFrame {
 
     private static final Logger logger = Logger.getLogger(Main.class.getName());
-
+    private JList<Pelicula> listRelaciones;
+    
     public VentanaPelicula(Pelicula pelicula) {
         setTitle(pelicula.getTitulo());
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
+        
+        listRelaciones = new JList<>();
+
 
         JPanel panelContenido = new JPanel(new BorderLayout(10, 10));
         panelContenido.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -84,6 +89,14 @@ public class VentanaPelicula extends JFrame {
                 }
             }
         });
+        listRelaciones.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                Pelicula peliRelacionada = listRelaciones.getSelectedValue();
+                if (peliRelacionada != null) {
+                    // Haz algo con la peli seleccionada
+                }
+            }
+        });
 
         // Configurar un tamaño fijo para el JScrollPane que contiene la lista
         JScrollPane scrollRelacionadas = new JScrollPane(listaRelacionadas);
@@ -137,5 +150,16 @@ public class VentanaPelicula extends JFrame {
                              !p.equals(pelicula) &&
                              p.getGenero() == generoPelicula) // Comparación directa de enums
                 .collect(Collectors.toList());
+    }
+    public void mostrarPeliculasRelacionadas(Pelicula peliSeleccionada) {
+        // 1) Obtenemos las pelis del mismo género
+        List<Pelicula> relacionadas = Contenedora.buscarPeliculasPorGenero(peliSeleccionada.getGenero(), peliSeleccionada);
+
+        // 2) Ponemos esas películas en el modelo de la lista
+        DefaultListModel<Pelicula> modelo = new DefaultListModel<>();
+        for (Pelicula p : relacionadas) {
+            modelo.addElement(p);
+        }
+        listRelaciones.setModel(modelo);
     }
 }
