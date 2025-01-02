@@ -1,7 +1,12 @@
 package domain;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 public class Contenedora {
 	private static ArrayList<Pelicula> lPeliculas = new ArrayList<>();
@@ -32,27 +37,87 @@ public class Contenedora {
 	
 	
 	public static void cargarPeliculas() {
-	    Pelicula p1 = new Pelicula( 0, "Venom 3", 109, "Eddie y Venom están a la fuga. Perseguidos por sus sendos mundos y cada vez más cercados, el dúo se ve abocado a tomar una decisión devastadora que hará que caiga el telón sobre el último baile de Venom y Eddie.", Genero.CIENCIA_FICCION, Valoracion.DOS_ESTRELLAS, "/imagenes/venom3.jpg");
-	    Pelicula p2 = new Pelicula(1, "Joker 2", 128, "Tras crear el caos, Arthur Fleck ha sido internado en Arkham a la espera de juicio por sus crímenes como Joker. Mientras lidia con su doble identidad, Arthur no sólo se topa con el amor verdadero, sino que también descubre la música que siempre ha estado dentro de él.", Genero.MUSICAL, Valoracion.CINCO_ESTRELLAS, "/imagenes/joker2.jpg");
-	    Pelicula p3 = new Pelicula(2, "Minions 4", 95, "Margo, Edith y Agnes adoran a su padre y se portan bien entre ellas, con su nuevo hermanito y con Lucy, a la que llaman mamá. Dru y Gru desarrollan un fuerte vínculo fraternal. Poppy es moralmente ambigua, como todos los villanos, pero trabaja en equipo y acaba siendo amiga de Gru y Margo.", Genero.COMEDIA, Valoracion.CUATRO_ESTRELLAS, "/imagenes/minions4.jpg");
-	    Pelicula p4 = new Pelicula(3, "Del Reves 2", 96, "Ahora que es adolescente, Riley experimenta nuevos sentimientos como Ansiedad y Envidia, que se imponen a los viejos mientras ella duda sobre si abandonar a sus antiguas amigas por otras de la escuela secundaria.", Genero.DRAMA, Valoracion.UNA_ESTRELLA, "/imagenes/insideout2.jpg");
-	    Pelicula p5 = new Pelicula(4, "Cars", 117, "Rayo McQueen es una prometedora figura del automovilismo, que está a punto de conseguir su primera Copa Pistón, aun siendo un novato. Sin embargo, el día que se dirige hacia el circuito, tiene un accidente y acaba perdido en un pueblo llamado Radiador Springs, medio abandonado en el que se ve obligado a quedarse.", Genero.ANIMACION, Valoracion.CUATRO_ESTRELLAS, "/imagenes/cars.jpg");
-	    Pelicula p6 = new Pelicula(5, "Cars 2", 106, "Rayo McQueen y la grúa Mate viajan al extranjero para participar en el primer Campeonato Mundial en el que se decidirá cuál es el coche más rápido de la tierra. Mate se convertirá en un espía secreto y McQueen competirá contra los mejores coches. El campeonato los llevará a Japón, París, Londres y por último, a Italia. Sin embargo, estarán muy ocupados para poder disfrutar de los placeres de cada lugar.", Genero.ANIMACION, Valoracion.CUATRO_ESTRELLAS, "/imagenes/cars2.jpg");
-	    Pelicula p7 = new Pelicula(6, "Cars 3", 109, "Eclipsado por los coches jóvenes, el veterano Rayo McQueen se ha visto expulsado del deporte que tanto ama. Sin embargo, no se rendirá tan fácilmente. Con la ayuda de sus amigos, Rayo aprende trucos nuevos para vencer al arrogante Jackson Storm.", Genero.ANIMACION, Valoracion.CUATRO_ESTRELLAS, "/imagenes/cars3.jpg");
-	    Pelicula p8 = new Pelicula(7, "Shrek", 89, "Hace mucho tiempo, en una lejana ciénaga, vivía un ogro llamado Shrek. Un día, su preciada soledad se ve interrumpida por un montón de personajes de cuento de hadas que invaden su casa. Todos fueron desterrados de su reino por el malvado Lord Farquaad. Decidido a devolverles su reino y recuperar la soledad de su ciénaga, Shrek llega a un acuerdo con Lord Farquaad y va a rescatar a la princesa Fiona, la futura esposa del rey. Sin embargo, la princesa esconde un oscuro secreto.", Genero.FANTASIA, Valoracion.CINCO_ESTRELLAS, "/imagenes/shrek.jpg");
-	    Pelicula p9 = new Pelicula(8, "Harry Potter y la piedra filosofal", 152 , "El día en que cumple once años, Harry Potter descubre que es hijo de dos conocidos hechiceros, de los que ha heredado poderes mágicos. Deberá acudir entonces a una famosa escuela de magia y hechicería: Howards.", Genero.FANTASIA, Valoracion.CUATRO_ESTRELLAS, "/imagenes/harry.jpg");
-	    Pelicula p10 = new Pelicula(9, "El diario de Noa", 124, "Historia de amor entre Allie Hamilton y Noah Calhoun y recordada en una residencia de ancianos, décadas después de que sucediera. Basada en el libro de Nicholas Sparks.", Genero.ROMANCE, Valoracion.CUATRO_ESTRELLAS, "/imagenes/noa.jpg");
-	    lPeliculas.add(p1);
-	    lPeliculas.add(p2);
-	    lPeliculas.add(p3);
-	    lPeliculas.add(p4);
-	    lPeliculas.add(p5);
-	    lPeliculas.add(p6);
-	    lPeliculas.add(p7);
-	    lPeliculas.add(p8);
-	    lPeliculas.add(p9);
-	    lPeliculas.add(p10);
+	    File file = new File("ficheros/pelis.txt");  
+
+	    List<String> lineas = new ArrayList<>();
+	    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+	        String linea;
+	        while ((linea = br.readLine()) != null) {
+	            linea = linea.trim();
+	            if (linea.endsWith(";")) {
+	                linea = linea.substring(0, linea.length() - 1);
+	            }
+	            if (!linea.isEmpty()) {
+	                lineas.add(linea);
+	            }
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return;
+	    }
+
+	    cargarPeliculasRec(lineas, 0);
 	}
 
+	private static void cargarPeliculasRec(List<String> lineas, int indice) {
+	    if (indice >= lineas.size()) {
+	        return;
+	    }
+
+	    String linea = lineas.get(indice);
+	    Pelicula p = parsearPelicula(linea);  
+	    
+
+	    lPeliculas.add(p);
+
+	    cargarPeliculasRec(lineas, indice + 1);
+	}
+
+	// Método que se encarga de convertir una línea de texto en un objeto Pelicula
+	private static Pelicula parsearPelicula(String linea) {
+	    try {
+	    
+	        String[] partes = linea.split(";");
+
+	        String strIndice = partes[0].trim();
+	        int indice = Integer.parseInt(strIndice);
+
+	        String strTitulo = limpiarComillas(partes[1]);
+
+	        String strDuracion = partes[2].trim();
+	        int duracion = Integer.parseInt(strDuracion);
+
+	        String strSinopsis = limpiarComillas(partes[3]);
+
+	        String strGenero = partes[4].trim();
+	        String generoRaw = strGenero.substring(strGenero.indexOf('.') + 1); 
+	        Genero genero = Genero.valueOf(generoRaw);
+
+	        String strValoracion = partes[5].trim();  
+	        String valRaw = strValoracion.substring(strValoracion.indexOf('.') + 1);
+	        Valoracion valoracion = Valoracion.valueOf(valRaw);
+
+	        String strRuta = limpiarComillas(partes[6]);
+
+	        // Creamos la película
+	        Pelicula peli = new Pelicula(indice, strTitulo, duracion, strSinopsis, genero, valoracion, strRuta);
+	        return peli;
+
+	    } catch (Exception e) {
+	        return null;
+	    }
+	}
+
+	// Función auxiliar que quita comillas iniciales y finales
+	private static String limpiarComillas(String texto) {
+	    String t = texto.trim();
+	    if (t.startsWith("\"")) {
+	        t = t.substring(1);
+	    }
+	    if (t.endsWith("\"")) {
+	        t = t.substring(0, t.length() - 1);
+	    }
+	    return t.trim();
+	}
 	
 }

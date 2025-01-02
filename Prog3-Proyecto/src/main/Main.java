@@ -33,7 +33,8 @@ public class Main {
 		
 		
 		Contenedora.cargarPeliculas();
-		
+		System.out.println(	Contenedora.getLPeliculas()
+);
 		VentanaArranque ventanaArranque = new VentanaArranque();
 		
 		BaseDeDatos.closeBD(con);
