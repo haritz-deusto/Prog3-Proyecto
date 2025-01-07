@@ -38,27 +38,29 @@ public class VentanaArranque extends JFrame {
         JButton botonRegistro = new JButton("Registrarse");
         botonRegistro.setToolTipText("Haz clic para registrarte");
 
-        JButton botonPrueba = new JButton("Botón Prueba");
+        JButton botonPrueba = new JButton("Deusto-Stream");
         botonPrueba.setToolTipText("test");
 
         //PERSONALIZAR BOTONES
+        Color ColorDeustoStream = new Color(100, 125, 255);
+        
         botonInicioSesion.setBackground(new Color(0, 123, 255)); // Color fondo azul
-        botonInicioSesion.setForeground(Color.WHITE); 
+        botonInicioSesion.setForeground(ColorDeustoStream); 
         botonInicioSesion.setFont(new Font("Arial", Font.BOLD, 14)); 
         botonInicioSesion.setPreferredSize(new Dimension(150, 40)); 
         
         botonInicioSesionAdmin.setBackground(new Color(0, 123, 255)); // Color fondo azul
-        botonInicioSesionAdmin.setForeground(Color.WHITE); 
+        botonInicioSesionAdmin.setForeground(ColorDeustoStream); 
         botonInicioSesionAdmin.setFont(new Font("Arial", Font.BOLD, 14)); 
         botonInicioSesionAdmin.setPreferredSize(new Dimension(150, 40));
 
         botonRegistro.setBackground(new Color(0, 123, 255)); // Color de fondo azul
-        botonRegistro.setForeground(Color.WHITE); 
+        botonRegistro.setForeground(ColorDeustoStream); 
         botonRegistro.setFont(new Font("Arial", Font.BOLD, 14));
         botonRegistro.setPreferredSize(new Dimension(150, 40));
 
         botonPrueba.setBackground(new Color(255, 193, 7)); // Color amarillo
-        botonPrueba.setForeground(Color.BLACK);
+        botonPrueba.setForeground(ColorDeustoStream);
         botonPrueba.setFont(new Font("Arial", Font.BOLD, 14));
         botonPrueba.setPreferredSize(new Dimension(150, 40));
         
@@ -68,6 +70,7 @@ public class VentanaArranque extends JFrame {
         panelInferior.add(botonInicioSesion);
         panelInferior.add(botonRegistro);
         panelInferior.add(botonInicioSesionAdmin);
+        panelInferior.setBackground(Color.DARK_GRAY);
 
         //PANEL CENTRAL
         panelCentral.setBackground(Color.LIGHT_GRAY); 
@@ -122,7 +125,6 @@ public class VentanaArranque extends JFrame {
 		setIconImage(imagen.getImage());
         setExtendedState(MAXIMIZED_BOTH);
         setTitle("DeustoStream");
-        setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
