@@ -7,6 +7,10 @@ import java.util.List;
 
 import domain.Pelicula;
 
+//IAG (herramienta: ChatGPT)
+//ADAPTADO La idea nos la ofrecio ChatGPT. A partir del codigo que nos ofrecio incluimos mejoras y cambios para daptarlo
+//a nuestro proyecto, como la forma de mostrarlo y el manejo de las listas de peliculas.
+
 public class VentanaMaraton extends JFrame {
 
 	private static final long serialVersionUID = 1L;

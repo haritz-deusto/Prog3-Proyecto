@@ -4,9 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

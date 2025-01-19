@@ -4,7 +4,10 @@ import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 public class ModeloTablaPeliculas extends DefaultTableModel {
-    public ModeloTablaPeliculas() {
+
+	private static final long serialVersionUID = 1L;
+
+	public ModeloTablaPeliculas() {
         addColumn("Poster");
         addColumn("Título");
     }

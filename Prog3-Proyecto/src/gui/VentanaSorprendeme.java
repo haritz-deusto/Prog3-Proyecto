@@ -12,7 +12,8 @@ import domain.Pelicula;
 
 public class VentanaSorprendeme extends JFrame {
 
-    private JLabel labelTitulo;
+	private static final long serialVersionUID = 1L;
+	private JLabel labelTitulo;
 
     public VentanaSorprendeme(List<Pelicula> peliculas) {
         setTitle("Sorpréndeme");

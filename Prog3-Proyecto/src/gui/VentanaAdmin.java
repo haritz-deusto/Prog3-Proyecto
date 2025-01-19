@@ -9,13 +9,13 @@ import domain.Pelicula;
 import domain.Genero;
 import domain.Valoracion;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class VentanaAdmin extends JFrame {
 
-    public VentanaAdmin() {
+	private static final long serialVersionUID = 1L;
+
+	public VentanaAdmin() {
         setTitle("Gestión de Base de Datos - Admin");
         setSize(800, 600);
         setLocationRelativeTo(null);

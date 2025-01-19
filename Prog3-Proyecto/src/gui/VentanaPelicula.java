@@ -9,7 +9,6 @@ import domain.Valoracion;
 import main.Main;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +16,8 @@ import java.util.stream.Collectors;
 
 public class VentanaPelicula extends JFrame {
 
-    private static final Logger logger = Logger.getLogger(Main.class.getName());
+	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(Main.class.getName());
     private JList<Pelicula> listRelaciones;
     
     public VentanaPelicula(Pelicula pelicula) {
