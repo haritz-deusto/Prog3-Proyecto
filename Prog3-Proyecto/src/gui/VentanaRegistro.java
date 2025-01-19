@@ -26,7 +26,6 @@ public class VentanaRegistro extends JFrame {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = Logger.getLogger(Main.class.getName());
 
-    // Componentes de la ventana
     private JLabel labelNombre, labelApellido, labelEmail, lblDni, labelNumTel, labelNumTarjeta, labelContrasenia, labelConfirmarContrasenia;
     private JTextField txtNombre, txtApellido, txtEmail, txtNumTel, txtNumTarjeta, txtDni;
     private JPasswordField txtContrasenia, txtConfirmarContrasenia;
@@ -39,16 +38,14 @@ public class VentanaRegistro extends JFrame {
         agregarEventos();
     }
 
-    // Método para configurar las propiedades de la ventana
     private void configurarVentana() {
         setTitle("Registro");
         setSize(500, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null); // Centrar la ventana en la pantalla
+        setLocationRelativeTo(null); 
         setLayout(new BorderLayout());
     }
 
-    // Método para inicializar los componentes
     private void inicializarComponentes() {
         labelNombre = new JLabel("Introduzca su nombre:");
         labelApellido = new JLabel("Introduzca su apellido:");
@@ -101,49 +98,13 @@ public class VentanaRegistro extends JFrame {
     	txtContrasenia.setText("");
     	txtConfirmarContrasenia.setText("");
     }
-    /*private void registrarUsuario(String n, String a, String e, String nt, String nta, String c) {
-    	File f = new File("usuarios.txt");
-    	try {
-			PrintWriter pw = new PrintWriter(new FileWriter(f, true));
-			pw.println(n+";"+a+";"+e+";"+nt+";"+nta+";"+c);
-			pw.flush();
-			pw.close();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-    }*/
-    
-    /*private boolean comprobarRegistro(String e) {
-    	boolean repetido = false;
-    	File f = new File("usuarios.txt");
-    	if(f.exists()) {
-    		try {
-				Scanner sc = new Scanner(f);
-				while(sc.hasNextLine()) {
-					String linea = sc.nextLine();
-					//linea = "n;a;e;nt;nta;co"
-					String [] partes = linea.split(";");
-					if(partes[2].equals(e)) {
-						repetido = true;
-					}
-				}
-				sc.close();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
-    		
-    	}
-    	return repetido;
-    }*/
 
-    // Método para agregar los componentes al panel principal con GridBagLayout
     private void agregarComponentes() {
         JPanel panelCentro = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Márgenes entre componentes
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Añadir campos al panel
         agregarComponente(panelCentro, labelNombre, gbc, 0, 0);
         agregarComponente(panelCentro, txtNombre, gbc, 1, 0);
         agregarComponente(panelCentro, labelApellido, gbc, 0, 1);

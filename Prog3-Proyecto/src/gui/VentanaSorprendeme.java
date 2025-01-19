@@ -63,6 +63,9 @@ public class VentanaSorprendeme extends JFrame {
         });
     }
 
+    
+  //IAG (herramienta: ChatGPT)
+  //ADAPTADO Hemos modificado el metodo para sincronizar el sonido y adaptarlo a nuestro proyecto.
     private void reproducirSonido() {
         try {
             File sonidoFile = new File(getClass().getResource("/imagenes/peliculaRandom.wav").getFile());

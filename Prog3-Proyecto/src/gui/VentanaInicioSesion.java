@@ -106,30 +106,6 @@ public class VentanaInicioSesion extends JFrame {
         panel.add(componente, gbc);
     }
 
-    /*private boolean inicioCorrecto(String em, String c) {
-    	boolean correcto = false;
-    	File f = new File("usuarios.txt");
-    	if(f.exists()) {
-    		try {
-				Scanner sc = new Scanner(f);
-				while(sc.hasNextLine()) {
-					String linea = sc.nextLine();
-					// linea = "n;a;e;nt;nta;co"
-					String [] partes = linea.split(";");
-					if(partes[2].equals(em) && partes[5].equals(c)) {
-						correcto = true;
-					}
-				}
-				sc.close();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
-    		
-    	}
-    	return correcto;
-    }*/
-    
-
     private void agregarEventos() {
         btnVolver.addActionListener((e) -> dispose()); // Cierra la ventana
         btnVolver.addActionListener((e) -> logger.log(Level.INFO, "Se ha pulsado el botón volver"));
@@ -143,8 +119,8 @@ public class VentanaInicioSesion extends JFrame {
 
             if (usuario != null && usuario instanceof Cliente) {
                 JOptionPane.showMessageDialog(this, "Bienvenido!");
-                new VentanaPrincipal(); // Inicia la ventana principal
-                dispose(); // Cierra la ventana de inicio de sesión
+                new VentanaPrincipal();
+                dispose();
             } else if (usuario instanceof Admin) {
                 JOptionPane.showMessageDialog(this, "Acceso denegado. Usa la ventana de admin para iniciar sesión.");
             } else {
