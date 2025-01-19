@@ -39,7 +39,7 @@ public class VentanaArranque extends JFrame {
         botonRegistro.setToolTipText("Haz clic para registrarte");
 
         JButton botonPrueba = new JButton("Deusto-Stream");
-        botonPrueba.setToolTipText("test");
+        botonPrueba.setToolTipText("Boton Prueba. Accede a la aplicación sin registrarte ni iniciar sesión.");
 
         //PERSONALIZAR BOTONES
         Color ColorDeustoStream = new Color(100, 125, 255);
