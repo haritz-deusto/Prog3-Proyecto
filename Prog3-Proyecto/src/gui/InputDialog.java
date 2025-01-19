@@ -1,3 +1,6 @@
+//IAG (herramienta: ChatGPT)
+//ADAPTADO IAG utilizada para corregir el codigo y lograr una busqueda letra por letra.
+
 package gui;
 
 import java.awt.BorderLayout;

@@ -1,3 +1,6 @@
+//IAG (herramienta: ChatGPT)
+//ADAPTADO IAG utilizada para corregir código y cargar datos de la bd para mostrarlos en pantalla.
+
 package gui;
 
 import javax.swing.*;

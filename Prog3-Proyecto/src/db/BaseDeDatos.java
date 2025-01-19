@@ -135,7 +135,7 @@ public class BaseDeDatos {
 		try (Connection con = initBD("baseDeDatos.db"); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, email);
 			try (ResultSet rs = ps.executeQuery()) {
-				return rs.next(); // Si hay un resultado, el email existe
+				return rs.next(); 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -205,7 +205,7 @@ public class BaseDeDatos {
 			pst.setString(2, contrasenia);
 
 			try (ResultSet rs = pst.executeQuery()) {
-				esValido = rs.next(); // Si hay un resultado, el admin existe
+				esValido = rs.next(); 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
